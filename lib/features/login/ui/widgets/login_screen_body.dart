@@ -66,11 +66,7 @@ class LoginScreenBody extends StatelessWidget {
                   .copyWith(color: ColorsManager.midnightBlue),
             ),
           ),
-          // Align(
-          //     alignment: Alignment.centerLeft,
-          //     child: Text('Please, Log in',
-          //         style: TextStyles.font30BlackExtraBold
-          //             .copyWith(color: ColorsManager.midnightBlue))),
+         
           const SizedBox(height: 20),
           const BuildLoginContainer(),
           const LoginBlocListener(),

@@ -4,7 +4,7 @@ import 'package:bwabat/core/routing/routes.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-import 'core/helpers/navigator_helper.dart';
+import 'helpers/navigator_helper.dart';
 
 class BwabatApp extends StatelessWidget {
   final AppRouter appRouter;

@@ -1,13 +1,8 @@
 class ApiConstants {
-  static const String apiBaseUrl = "http://195.35.14.201:3434/api/";
+  static const String apiBaseUrl = "https://preview20.meta-bytes.net/api/";
 
-  static const String login = "auth/login";
-  static const String logout = "auth/logout";
-  static const String register = "auth/register";
-  static const String template = "template";
-  static const String audience = "audience";
-  static const String campaign = "campaign";
-  static const String account = "account";
+  static const String login = "login";
+  static const String scanQrCode = "scan-qrcode";
 }
 
 class ApiErrors {

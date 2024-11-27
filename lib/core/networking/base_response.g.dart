@@ -11,9 +11,7 @@ BaseResponse<T> _$BaseResponseFromJson<T>(
   T Function(Object? json) fromJsonT,
 ) =>
     BaseResponse<T>(
-      error: json['error'] == null
-          ? null
-          : ErrorData.fromJson(json['error'] as Map<String, dynamic>),
+      error: json['error'] as String?,
       data: _$nullableGenericFromJson(json['data'], fromJsonT),
       status: (json['status'] as num?)?.toInt(),
     );

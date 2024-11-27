@@ -5,13 +5,11 @@ import 'package:bwabat/core/helpers/constants.dart';
 import 'package:bwabat/core/helpers/shared_pref_helper.dart';
 import 'package:bwabat/features/login/data/models/login_request_body.dart';
 import 'package:bwabat/features/login/data/repos/auth_repo.dart';
-import 'package:bwabat/features/login/logic/login_cubit/login_state.dart';
-
-import 'package:flutter/foundation.dart';
+import 'package:bwabat/features/login/logic/login_state.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_form_builder/flutter_form_builder.dart';
 
-import '../../../../core/networking/dio_factory.dart';
-
+import '../../../core/networking/dio_factory.dart';
 
 class LoginCubit extends Cubit<LoginState> {
   final AuthRepo _authRepo;
@@ -19,7 +17,7 @@ class LoginCubit extends Cubit<LoginState> {
   LoginCubit(this._authRepo) : super(const LoginState.initial());
   TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
-  final formKey = GlobalKey<FormState>();
+  final formKey = GlobalKey<FormBuilderState>();
 
   void emitLoginStates() async {
     emit(const LoginState.loginLoadingState());
@@ -27,9 +25,7 @@ class LoginCubit extends Cubit<LoginState> {
       email: emailController.text,
       password: passwordController.text,
     ));
-    if (kDebugMode) {
-      print('response----------$response');
-    }
+
     response.when(success: (loginResponse) async {
       await saveUserToken(loginResponse.data?.user?.token ?? '');
       debugPrint('token----${loginResponse.data?.user?.token}');

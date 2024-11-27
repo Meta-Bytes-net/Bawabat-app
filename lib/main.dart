@@ -1,5 +1,5 @@
 import 'package:bloc/bloc.dart';
-import 'package:bwabat/bwabat_app.dart';
+import 'package:bwabat/core/bwabat_app.dart';
 import 'package:bwabat/core/di/dependency_injection.dart';
 import 'package:bwabat/core/helpers/bloc_observer.dart';
 import 'package:bwabat/core/helpers/extensions.dart';

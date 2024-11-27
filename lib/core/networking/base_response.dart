@@ -1,5 +1,5 @@
-import 'package:bwabat/core/networking/api_error_model.dart';
 import 'package:json_annotation/json_annotation.dart';
+
 part 'base_response.g.dart';
 
 @JsonSerializable(genericArgumentFactories: true)
@@ -7,7 +7,7 @@ class BaseResponse<T> {
   @JsonKey(name: "status")
   int? status;
   @JsonKey(name: "error")
-  ErrorData? error;
+  String? error;
   @JsonKey(name: "data")
   T? data;
   BaseResponse({this.error, required this.data, this.status});

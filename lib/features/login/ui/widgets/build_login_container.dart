@@ -7,10 +7,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 // import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:form_builder_validators/form_builder_validators.dart';
-import 'package:loading_animation_widget/loading_animation_widget.dart';
 
-import '../../../../core/helpers/app_regex.dart';
-import '../../logic/login_cubit/login_cubit.dart';
+import '../../logic/login_cubit.dart';
 
 class BuildLoginContainer extends StatefulWidget {
   const BuildLoginContainer({
@@ -34,33 +32,34 @@ class _BuildLoginContainerState extends State<BuildLoginContainer> {
   void initState() {
     super.initState();
     passwordController = context.read<LoginCubit>().passwordController;
-    setupPasswordControllerListener();
+    // setupPasswordControllerListener();
   }
 
-  final _formKey = GlobalKey<FormBuilderState>();
-  void setupPasswordControllerListener() {
-    passwordController.addListener(() {
-      setState(() {
-        hasLowercase = AppRegex.hasLowerCase(passwordController.text);
-        hasUppercase = AppRegex.hasUpperCase(passwordController.text);
-        hasSpecialCharacters =
-            AppRegex.hasSpecialCharacter(passwordController.text);
-        hasNumber = AppRegex.hasNumber(passwordController.text);
-        hasMinLength = AppRegex.hasMinLength(passwordController.text);
-      });
-    });
-  }
+  // final _formKey = GlobalKey<FormBuilderState>();
+  // void setupPasswordControllerListener() {
+  //   passwordController.addListener(() {
+  //     setState(() {
+  //       hasLowercase = AppRegex.hasLowerCase(passwordController.text);
+  //       hasUppercase = AppRegex.hasUpperCase(passwordController.text);
+  //       hasSpecialCharacters =
+  //           AppRegex.hasSpecialCharacter(passwordController.text);
+  //       hasNumber = AppRegex.hasNumber(passwordController.text);
+  //       hasMinLength = AppRegex.hasMinLength(passwordController.text);
+  //     });
+  //   });
+  // }
 
   @override
   Widget build(BuildContext context) {
     return FormBuilder(
-      key: _formKey,
+      key: context.read<LoginCubit>().formKey,
       // autovalidateMode: AutovalidateMode.onUserInteraction,
       child: Column(
         children: [
           AppTextFormField(
             // key: _emailFieldKey,
             label: 'Email',
+            controller: context.read<LoginCubit>().emailController,
             validator: FormBuilderValidators.compose([
               FormBuilderValidators.required(),
               FormBuilderValidators.email(),
@@ -73,6 +72,7 @@ class _BuildLoginContainerState extends State<BuildLoginContainer> {
           const SizedBox(height: 10),
           AppTextFormField(
             label: 'Password',
+            controller: context.read<LoginCubit>().passwordController,
             isObscureText: true,
             validator: FormBuilderValidators.compose([
               FormBuilderValidators.required(),
@@ -96,25 +96,7 @@ class _BuildLoginContainerState extends State<BuildLoginContainer> {
                     backgroundColor: ColorsManager.primaryColor,
 
                     padding: const EdgeInsets.symmetric(vertical: 13),
-                    onPressed: () {
-                      showDialog(
-                          context: context,
-                          builder: (context) => Center(
-                                child: LoadingAnimationWidget.discreteCircle(
-                                  color: ColorsManager.primaryColor,
-                                  secondRingColor: const Color(0xFF1A1A3F),
-                                  thirdRingColor: ColorsManager.primaryColor,
-                                  size: 50,
-                                ),
-                              ));
-                      // Validate and save the form values
-                      _formKey.currentState?.saveAndValidate();
-                      debugPrint(_formKey.currentState?.value.toString());
-                      // On another side, can access all field values without saving form with instantValues
-                      _formKey.currentState?.validate();
-                      debugPrint(
-                          _formKey.currentState?.instantValue.toString());
-                    },
+                    onPressed: () => validateThenDoLogin(context),
                     text: 'Login',
                     // child: const Text('Login'),
                   ),
@@ -134,8 +116,8 @@ class _BuildLoginContainerState extends State<BuildLoginContainer> {
   }
 
   void validateThenDoLogin(BuildContext context) {
-    if (context.read<LoginCubit>().formKey.currentState!.validate() &&
-        AppRegex.isPasswordValid(passwordController.text)) {
+    if (context.read<LoginCubit>().formKey.currentState?.saveAndValidate() ??
+        false) {
       context.read<LoginCubit>().emitLoginStates();
     }
   }

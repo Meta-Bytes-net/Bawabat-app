@@ -76,16 +76,4 @@ class AppPreferences {
   Future<String?> getUserId() async {
     return _sharedPreferences.getString(prefsKeyUserId);
   }
-
-  Future<void> setManageAudienceOpened() async {
-    _sharedPreferences.setBool(prefsKeyIsManageAudinceOpened, true);
-  }
-
-  Future<bool> isManageAudinceOpened() async {
-    return _sharedPreferences.getBool(prefsKeyIsManageAudinceOpened) ?? false;
-  }
-
-  Future<void> removeManageAudienceOpened() async {
-    _sharedPreferences.remove(prefsKeyIsManageAudinceOpened);
-  }
 }
