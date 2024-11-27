@@ -8,7 +8,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../../../core/networking/api_error_model.dart';
-import '../../../../core/theming/styles.dart';
+import '../../../../core/theming/text_styles.dart';
 import '../../logic/login_cubit.dart';
 import '../../logic/login_state.dart';
 
@@ -29,7 +29,7 @@ class LoginBlocListener extends StatelessWidget {
             getIt<AppPreferences>()
                 .setUserId(loginResponse.data?.user?.id.toString() ?? "");
             stopLoading(context);
-            context.pushNamedAndRemoveUntil(Routes.homeScreen,
+            context.pushNamedAndRemoveUntil(Routes.mainLayoutScreen,
                 predicate: (context) => false);
           },
           loginErrorState: (apiErrorModel) {

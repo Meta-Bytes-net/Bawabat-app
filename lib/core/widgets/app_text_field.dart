@@ -1,6 +1,6 @@
 
 import 'package:bwabat/core/theming/font_weight_helper.dart';
-import 'package:bwabat/core/theming/styles.dart';
+import 'package:bwabat/core/theming/text_styles.dart';
 import 'package:flutter/material.dart';
 //
 import 'package:flutter_screenutil/flutter_screenutil.dart';

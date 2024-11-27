@@ -9,7 +9,7 @@ class LoginScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return const SafeArea(
       child: Scaffold(
-        backgroundColor: Colors.white,
+        backgroundColor: Color(0xFF081B33),
         body: SingleChildScrollView(child: LoginScreenBody()),
       ),
     );

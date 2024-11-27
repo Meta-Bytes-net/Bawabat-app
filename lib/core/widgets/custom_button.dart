@@ -80,11 +80,13 @@ class CustomButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ElevatedButton.icon(
+      
         onPressed: isDisabled == true ? null : onPressed,
         iconAlignment: textDirection == TextDirection.ltr
             ? IconAlignment.start
             : IconAlignment.end,
         style: ElevatedButton.styleFrom(
+          
           backgroundColor: backgroundColor,
           // disabledBackgroundColor: backgroundColor ?? ColorsManager.buttonColor,
           minimumSize: Size.zero,
