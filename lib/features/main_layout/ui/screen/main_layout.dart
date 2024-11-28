@@ -1,6 +1,8 @@
 import 'package:bwabat/core/resources/app_assets.dart';
 import 'package:bwabat/features/main_layout/ui/screen/home_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:persistent_bottom_nav_bar/persistent_bottom_nav_bar.dart';
 
 class MainLayoutScreen extends StatefulWidget {
@@ -31,6 +33,7 @@ class _MainLayoutScreenState extends State<MainLayoutScreen>
           body: PersistentTabView(
         context,
         controller: _controller,
+
         screens: _buildScreens(),
         items: _navBarsItems(),
         handleAndroidBackButtonPress: true, // Default is true.
@@ -40,9 +43,10 @@ class _MainLayoutScreenState extends State<MainLayoutScreen>
         hideNavigationBarWhenKeyboardAppears: true,
 
         popBehaviorOnSelectedNavBarItemPress: PopBehavior.all,
-        padding: const EdgeInsets.only(bottom: 7, top: 2),
-
-        // navBarHeight: 60.h,
+        padding: const EdgeInsets.only(
+          bottom: 10,
+        ),
+        navBarHeight: 70,
         backgroundColor: Colors.black87,
         isVisible: true,
         animationSettings: const NavBarAnimationSettings(
@@ -58,7 +62,10 @@ class _MainLayoutScreenState extends State<MainLayoutScreen>
           ),
         ),
         confineToSafeArea: true,
-
+        decoration: NavBarDecoration(
+          borderRadius: BorderRadius.circular(20.r),
+        ),
+        margin: const EdgeInsets.all(5),
         navBarStyle: NavBarStyle.style15,
       )),
     );
@@ -67,19 +74,24 @@ class _MainLayoutScreenState extends State<MainLayoutScreen>
   List<PersistentBottomNavBarItem> _navBarsItems() {
     return [
       PersistentBottomNavBarItem(
-        icon: const Icon(Icons.keyboard),
+        icon: Padding(
+          padding: const EdgeInsets.only(top: 6.0),
+          child: SvgPicture.asset(
+            Assets.svgsKeybordIcon,
+          ),
+        ),
         title: ("Manual"),
         activeColorPrimary: const Color(0xFF1C61C6),
         inactiveColorPrimary: Colors.white,
       ),
       PersistentBottomNavBarItem(
-        icon: Image.asset(
-          Assets.svgsQrCodeFloatingAction,
-          height: 25,
-          width: 25,
+        icon: SvgPicture.asset(
+          Assets.svgsHomeIcon,
+          height: 20,
+          width: 20,
         ),
-        inactiveIcon: Image.asset(
-          Assets.svgsQrCodeFloatingAction,
+        inactiveIcon: SvgPicture.asset(
+          Assets.svgsHomeIcon,
           height: 28,
           width: 28,
         ),
@@ -87,7 +99,12 @@ class _MainLayoutScreenState extends State<MainLayoutScreen>
         inactiveColorPrimary: Colors.white,
       ),
       PersistentBottomNavBarItem(
-        icon: const Icon(Icons.history),
+        icon: Padding(
+          padding: const EdgeInsets.only(top: 8.0),
+          child: SvgPicture.asset(
+            Assets.svgsHistoryIcon,
+          ),
+        ),
         title: ("History"),
         activeColorPrimary: const Color(0xFF1C61C6),
         inactiveColorPrimary: Colors.white,

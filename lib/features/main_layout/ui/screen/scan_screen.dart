@@ -16,11 +16,13 @@ class ScanScreen extends StatefulWidget {
 
 class _ScanScreenState extends State<ScanScreen> with WidgetsBindingObserver {
   final MobileScannerController controller = MobileScannerController(
-    formats: [BarcodeFormat.all], // You can specify formats to scan
-    detectionSpeed: DetectionSpeed.noDuplicates, // Avoid duplicate results
+    formats: [BarcodeFormat.all],
+    detectionSpeed: DetectionSpeed.noDuplicates,
   );
 
   StreamSubscription<Object?>? _subscription;
+
+  bool _isNavigating = false; // Prevent duplicate navigation
 
   @override
   void didChangeAppLifecycleState(AppLifecycleState state) {
@@ -38,8 +40,10 @@ class _ScanScreenState extends State<ScanScreen> with WidgetsBindingObserver {
         break;
 
       case AppLifecycleState.resumed:
-        _subscription = controller.barcodes.listen(_handleBarcode);
-        unawaited(controller.start());
+        if (!_isNavigating) {
+          _subscription = controller.barcodes.listen(_handleBarcode);
+          unawaited(controller.start());
+        }
         break;
 
       case AppLifecycleState.inactive:
@@ -64,36 +68,39 @@ class _ScanScreenState extends State<ScanScreen> with WidgetsBindingObserver {
     unawaited(_subscription?.cancel());
     _subscription = null;
     super.dispose();
-    await controller.dispose();
+    await controller.dispose(); // Dispose the controller when the widget is disposed
   }
 
   /// Handle scanned barcode
   void _handleBarcode(BarcodeCapture barcodeCapture) {
-    if (!mounted) return;
+    if (!mounted || _isNavigating) return;
 
-    // Get the first barcode detected
     final List<Barcode> barcodes = barcodeCapture.barcodes;
     if (barcodes.isNotEmpty) {
       final String? value = barcodes.first.rawValue;
 
       if (value != null) {
         debugPrint('Scanned Barcode: $value');
-        // Perform any action based on the scanned barcode
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text('Scanned: $value')),
-        );
-        unawaited(_subscription?.cancel());
-        _subscription = null;
-        super.dispose();
-        controller.dispose();
+        setState(() {
+          _isNavigating = true; // Prevent further scans
+        });
+
         PersistentNavBarNavigator.pushNewScreenWithRouteSettings(
           context,
           settings: const RouteSettings(name: Routes.homeScreen),
           screen: const HomeScreen(),
           withNavBar: true,
           pageTransitionAnimation: PageTransitionAnimation.scale,
-        );
-        // Optionally, stop scanning after successful detection
+        ).then((_) {
+          // Reset the navigation state when returning to this screen
+          setState(() {
+            _isNavigating = false;
+          });
+        });
+
+        unawaited(_subscription?.cancel()); // Stop listening for barcodes
+        _subscription = null;
+        unawaited(controller.stop()); // Stop the scanner during navigation
       }
     }
   }
@@ -101,7 +108,7 @@ class _ScanScreenState extends State<ScanScreen> with WidgetsBindingObserver {
   @override
   Widget build(BuildContext context) {
     return MobileScanner(
-      controller: controller,
+      controller: controller,       
       onDetect: (BarcodeCapture capture) {
         _handleBarcode(capture);
       },

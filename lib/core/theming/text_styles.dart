@@ -13,16 +13,28 @@ class TextStyles {
         fontFamily: GoogleFonts.montserrat().fontFamily);
   }
 
-  static TextStyle font30BlackExtraBold =
-      getTextStyle(fontSize: 30.sp, fontWeight: FontWeightHelper.extraBold);
-  static TextStyle font20BlackExtraBold =
-      getTextStyle(fontSize: 20.sp, fontWeight: FontWeightHelper.extraBold);
+  static TextStyle font30BlackExtraBold = getTextStyle(
+      fontSize: 30.sp,
+      fontWeight: FontWeightHelper.extraBold,
+      color: Colors.black);
+  static TextStyle font20BlackExtraBold = getTextStyle(
+      fontSize: 20.sp,
+      fontWeight: FontWeightHelper.extraBold,
+      color: Colors.black);
   static TextStyle font20WhiteSemiBold =
       getTextStyle(fontSize: 20.sp, fontWeight: FontWeightHelper.semiBold);
+  static TextStyle font20blackSemiBold = getTextStyle(
+      fontSize: 20.sp,
+      fontWeight: FontWeightHelper.semiBold,
+      color: Colors.black);
   static TextStyle font25WhiteMedium =
       getTextStyle(fontSize: 25.sp, fontWeight: FontWeightHelper.medium);
   static TextStyle font14WhiteSemiBold =
       getTextStyle(fontSize: 14.sp, fontWeight: FontWeightHelper.semiBold);
+  static TextStyle font13GrayRegular = getTextStyle(
+      fontSize: 13.sp,
+      fontWeight: FontWeightHelper.regular,
+      color: const Color(0xFF707070));
   // unused
   static TextStyle font16GreenExtraBold = TextStyle(
       fontSize: 28.sp,

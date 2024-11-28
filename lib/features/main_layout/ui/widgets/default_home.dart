@@ -1,22 +1,21 @@
-import 'package:bwabat/core/routing/routes.dart';
-import 'package:bwabat/core/theming/text_styles.dart';
-import 'package:bwabat/core/widgets/custom_button.dart';
+import 'package:bwabat/core/resources/app_assets.dart';
 import 'package:bwabat/features/main_layout/ui/screen/scan_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:persistent_bottom_nav_bar/persistent_bottom_nav_bar.dart';
 
-import '../../../../core/resources/app_assets.dart';
 import '../../../../core/resources/sizes.dart';
+import '../../../../core/routing/routes.dart';
+import '../../../../core/theming/text_styles.dart';
+import '../../../../core/widgets/custom_button.dart';
 
-class HomeScreenBody extends StatelessWidget {
-  const HomeScreenBody({super.key});
+class DefaultHome extends StatelessWidget {
+  const DefaultHome({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      color: const Color(0xFF081B33),
+    return Padding(
       padding: const EdgeInsets.only(
         right: 30,
         left: 30,
@@ -69,12 +68,11 @@ class HomeScreenBody extends StatelessWidget {
                   padding: const EdgeInsets.symmetric(
                     vertical: 15,
                   ),
-                  child: CustomButton.withoutIcon(
+                  child: CustomButton.withIcon(
+                    iconPath: Assets.svgsQrCodeIconButton,
                     textColor: Colors.white,
                     fontSize: 18,
-
                     backgroundColor: const Color.fromARGB(255, 25, 75, 136),
-
                     padding: const EdgeInsets.symmetric(vertical: 13),
                     text: 'Scan Now',
                     onPressed: () {

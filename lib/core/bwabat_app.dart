@@ -15,7 +15,7 @@ class BwabatApp extends StatelessWidget {
         minTextAdapt: true,
         child: MaterialApp(
           navigatorKey: NavigationService.navigatorkey,
-          title: 'Bulk App',
+          title: 'Bawabat',
           theme: ThemeData(
               // scaffoldBackgroundColor: ColorsManager.darkBackGround,
               ),
