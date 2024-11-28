@@ -56,6 +56,8 @@ dependencies:
   json_annotation: ^4.9.0
   gap: ^3.0.1
   persistent_bottom_nav_bar: ^6.2.1
+  mobile_scanner: ^6.0.2
+  ticket_widget: ^1.0.2
 
   
 

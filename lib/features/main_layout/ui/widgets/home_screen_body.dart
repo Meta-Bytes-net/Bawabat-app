@@ -1,8 +1,11 @@
+import 'package:bwabat/core/routing/routes.dart';
 import 'package:bwabat/core/theming/text_styles.dart';
 import 'package:bwabat/core/widgets/custom_button.dart';
+import 'package:bwabat/features/main_layout/ui/screen/scan_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:persistent_bottom_nav_bar/persistent_bottom_nav_bar.dart';
 
 import '../../../../core/resources/app_assets.dart';
 import '../../../../core/resources/sizes.dart';
@@ -73,7 +76,17 @@ class HomeScreenBody extends StatelessWidget {
                     backgroundColor: const Color.fromARGB(255, 25, 75, 136),
 
                     padding: const EdgeInsets.symmetric(vertical: 13),
-                    text: 'Scan Now', onPressed: () {},
+                    text: 'Scan Now',
+                    onPressed: () {
+                      PersistentNavBarNavigator.pushNewScreenWithRouteSettings(
+                        context,
+                        settings: const RouteSettings(name: Routes.scanScreen),
+                        screen: const ScanScreen(),
+                        withNavBar: true,
+                        pageTransitionAnimation:
+                            PageTransitionAnimation.cupertino,
+                      );
+                    },
                     // child: const Text('Login'),
                   ),
                 ),
