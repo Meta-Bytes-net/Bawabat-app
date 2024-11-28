@@ -59,6 +59,7 @@ dependencies:
   mobile_scanner: ^6.0.2
   ticket_widget: ^1.0.2
   dotted_line: ^3.2.3
+  encrypt: ^5.0.3
 
   
 

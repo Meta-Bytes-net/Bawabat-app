@@ -1,4 +1,3 @@
-
 import 'package:bwabat/core/networking/api_error_model.dart';
 import 'package:bwabat/core/networking/base_response.dart';
 import 'package:json_annotation/json_annotation.dart';

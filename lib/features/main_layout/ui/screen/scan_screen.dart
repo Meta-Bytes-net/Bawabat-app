@@ -68,7 +68,8 @@ class _ScanScreenState extends State<ScanScreen> with WidgetsBindingObserver {
     unawaited(_subscription?.cancel());
     _subscription = null;
     super.dispose();
-    await controller.dispose(); // Dispose the controller when the widget is disposed
+    await controller
+        .dispose(); // Dispose the controller when the widget is disposed
   }
 
   /// Handle scanned barcode
@@ -108,7 +109,7 @@ class _ScanScreenState extends State<ScanScreen> with WidgetsBindingObserver {
   @override
   Widget build(BuildContext context) {
     return MobileScanner(
-      controller: controller,       
+      controller: controller,
       onDetect: (BarcodeCapture capture) {
         _handleBarcode(capture);
       },

@@ -1,5 +1,5 @@
-import 'package:bwabat/features/main_layout/ui/widgets/custom_ticket_status.dart';
-import 'package:bwabat/features/main_layout/ui/widgets/default_home.dart';
+import 'package:bwabat/features/main_layout/ui/widgets/custom_ticket_status_screen.dart';
+import 'package:bwabat/features/main_layout/ui/widgets/default_home_screen.dart';
 import 'package:flutter/material.dart';
 
 class HomeScreen extends StatelessWidget {

@@ -1,5 +1,4 @@
 class AppStrings {
-
   // error handler
   static const String badRequestError = "bad_request_error";
   static const String noContent = "no_content";

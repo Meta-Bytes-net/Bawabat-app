@@ -56,7 +56,7 @@ class MyCustomAppBar extends StatelessWidget implements PreferredSizeWidget {
             TextSpan(text: 'META ', style: TextStyles.font26whiteRegular),
             TextSpan(
               style: TextStyles.font26whiteRegular,
-                  // .copyWith(color: ColorsManager.containerTitleColor),
+              // .copyWith(color: ColorsManager.containerTitleColor),
               text: 'B',
             ),
           ],

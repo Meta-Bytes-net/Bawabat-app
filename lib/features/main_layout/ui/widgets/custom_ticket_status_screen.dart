@@ -1,11 +1,13 @@
 import 'package:bwabat/core/helpers/extensions.dart';
 import 'package:bwabat/core/resources/app_assets.dart';
 import 'package:bwabat/core/resources/sizes.dart';
+import 'package:bwabat/core/routing/routes.dart';
 import 'package:bwabat/features/main_layout/ui/screen/home_screen.dart';
 import 'package:dotted_line/dotted_line.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:persistent_bottom_nav_bar/persistent_bottom_nav_bar.dart';
 import 'package:ticket_widget/ticket_widget.dart';
 
 import '../../../../core/theming/text_styles.dart';
@@ -30,10 +32,24 @@ class CustomTicketStatus extends StatelessWidget {
           ),
           BuildTicketWidget(ticketType: ticketType),
           // gapH12,
-          SvgPicture.asset(
-            Assets.svgsSync,
-            height: 90.h,
-            width: 90.w,
+          GestureDetector(
+            onTap: () =>
+                PersistentNavBarNavigator.pushNewScreenWithRouteSettings(
+              context,
+              settings: const RouteSettings(
+                name: Routes.homeScreen,
+              ),
+              screen: const HomeScreen(
+                ticketType: TicketType.defaultHome,
+              ),
+              withNavBar: true,
+              pageTransitionAnimation: PageTransitionAnimation.scale,
+            ),
+            child: SvgPicture.asset(
+              Assets.svgsSync,
+              height: 90.h,
+              width: 90.w,
+            ),
           ),
           gapH64,
         ],

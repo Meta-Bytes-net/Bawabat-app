@@ -27,8 +27,7 @@ class AppFloatingActionButton extends StatelessWidget {
           ),
           onPressed: () {
             onPressed!();
-          }
-          ),
+          }),
     );
   }
 }
