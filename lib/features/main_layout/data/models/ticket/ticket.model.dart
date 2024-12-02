@@ -4,15 +4,18 @@ part 'ticket.model.g.dart';
 
 @JsonSerializable()
 class Ticket {
-  @JsonKey(name: "rn")
-  int? registrationNumber;
+  @JsonKey(name: "ticket_number")
+  int? ticketNumber;
+  @JsonKey(name: "user_id")
   int? uid;
-  @JsonKey(name: "un")
+  @JsonKey(name: "user_name")
   String? userName;
 
+  @JsonKey(name: "ticket_type")
+  String? ticketType;
   String? msg;
 
-  Ticket({this.registrationNumber, this.uid, this.userName, this.msg});
+  Ticket({this.ticketNumber, this.uid, this.userName, this.msg});
 
   factory Ticket.fromJson(Map<String, dynamic> json) {
     return _$TicketFromJson(json);

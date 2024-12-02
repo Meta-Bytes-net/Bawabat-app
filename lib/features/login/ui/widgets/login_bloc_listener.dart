@@ -1,5 +1,4 @@
 import 'package:bwabat/core/di/dependency_injection.dart';
-import 'package:bwabat/core/helpers/app_preference.dart';
 import 'package:bwabat/core/helpers/extensions.dart';
 import 'package:bwabat/core/routing/routes.dart';
 import 'package:bwabat/core/widgets/overlay_loading_state.dart';
@@ -7,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
+import '../../../../core/helpers/app_preference.dart';
 import '../../../../core/networking/api_error_model.dart';
 import '../../../../core/theming/text_styles.dart';
 import '../../logic/login_cubit.dart';
@@ -26,8 +26,6 @@ class LoginBlocListener extends StatelessWidget {
         state.whenOrNull(
           loginLoadingState: () => startLoading(context),
           loginSuccessState: (loginResponse) {
-            getIt<AppPreferences>()
-                .setUserId(loginResponse.data?.user?.id.toString() ?? "");
             stopLoading(context);
             context.pushNamedAndRemoveUntil(Routes.mainLayoutScreen,
                 predicate: (context) => false);

@@ -20,7 +20,7 @@ class BwabatApp extends StatelessWidget {
               // scaffoldBackgroundColor: ColorsManager.darkBackGround,
               ),
           debugShowCheckedModeBanner: false,
-          initialRoute: Routes.mainLayoutScreen,
+          initialRoute: Routes.loginScreen,
           onGenerateRoute: appRouter.generateRoute,
         ));
   }

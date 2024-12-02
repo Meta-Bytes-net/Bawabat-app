@@ -1,5 +1,10 @@
 import 'dart:async';
+import 'dart:convert';
 
+import 'package:bwabat/core/helpers/encryption_manager.dart';
+import 'package:bwabat/core/helpers/shared_pref_helper.dart';
+import 'package:bwabat/features/login/data/models/converted_keys.dart';
+import 'package:bwabat/features/main_layout/data/models/ticket/ticket.model.dart';
 import 'package:bwabat/features/main_layout/ui/screen/home_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:mobile_scanner/mobile_scanner.dart';
@@ -73,7 +78,7 @@ class _ScanScreenState extends State<ScanScreen> with WidgetsBindingObserver {
   }
 
   /// Handle scanned barcode
-  void _handleBarcode(BarcodeCapture barcodeCapture) {
+  Future<void> _handleBarcode(BarcodeCapture barcodeCapture) async {
     if (!mounted || _isNavigating) return;
 
     final List<Barcode> barcodes = barcodeCapture.barcodes;
@@ -85,19 +90,35 @@ class _ScanScreenState extends State<ScanScreen> with WidgetsBindingObserver {
         setState(() {
           _isNavigating = true; // Prevent further scans
         });
-
-        PersistentNavBarNavigator.pushNewScreenWithRouteSettings(
-          context,
-          settings: const RouteSettings(name: Routes.homeScreen),
-          screen: const HomeScreen(),
-          withNavBar: true,
-          pageTransitionAnimation: PageTransitionAnimation.scale,
-        ).then((_) {
-          // Reset the navigation state when returning to this screen
-          setState(() {
-            _isNavigating = false;
+        ConvertedKeys? convertedKeys =
+            await SharedPrefHelper.retrieveConvertedKeysSecurely();
+        String? decryptData = EncryptionManager.decryptData(
+          value,
+          convertedKeys ?? ConvertedKeys(encryprionkey: null, iv: null),
+        );
+        Ticket convertedStringToTicket =
+            Ticket.fromJson(jsonDecode(decryptData ?? '{}'));
+        if (mounted) {
+          PersistentNavBarNavigator.pushNewScreenWithRouteSettings(
+            context,
+            settings: RouteSettings(
+                name: Routes.homeScreen, arguments: convertedStringToTicket),
+            screen: convertedStringToTicket.ticketNumber == null
+                ? const HomeScreen(
+                    ticketType: TicketType.error,
+                  )
+                : const HomeScreen(
+                    ticketType: TicketType.success,
+                  ),
+            withNavBar: true,
+            pageTransitionAnimation: PageTransitionAnimation.scale,
+          ).then((_) {
+            // Reset the navigation state when returning to this screen
+            setState(() {
+              _isNavigating = false;
+            });
           });
-        });
+        }
 
         unawaited(_subscription?.cancel()); // Stop listening for barcodes
         _subscription = null;

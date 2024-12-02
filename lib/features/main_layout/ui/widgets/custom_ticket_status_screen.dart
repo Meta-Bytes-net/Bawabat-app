@@ -2,11 +2,13 @@ import 'package:bwabat/core/helpers/extensions.dart';
 import 'package:bwabat/core/resources/app_assets.dart';
 import 'package:bwabat/core/resources/sizes.dart';
 import 'package:bwabat/core/routing/routes.dart';
+import 'package:bwabat/features/main_layout/data/models/ticket/ticket.model.dart';
 import 'package:bwabat/features/main_layout/ui/screen/home_screen.dart';
 import 'package:dotted_line/dotted_line.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:intl/intl.dart';
 import 'package:persistent_bottom_nav_bar/persistent_bottom_nav_bar.dart';
 import 'package:ticket_widget/ticket_widget.dart';
 
@@ -14,7 +16,8 @@ import '../../../../core/theming/text_styles.dart';
 
 class CustomTicketStatus extends StatelessWidget {
   final TicketType? ticketType;
-  const CustomTicketStatus({super.key, this.ticketType});
+  final Ticket? ticket;
+  const CustomTicketStatus({super.key, this.ticketType, this.ticket});
 
   @override
   Widget build(BuildContext context) {
@@ -30,7 +33,7 @@ class CustomTicketStatus extends StatelessWidget {
             width: 50.h,
             colorFilter: const ColorFilter.mode(Colors.white, BlendMode.srcIn),
           ),
-          BuildTicketWidget(ticketType: ticketType),
+          BuildTicketWidget(ticketType: ticketType, ticket: ticket ?? Ticket()),
           // gapH12,
           GestureDetector(
             onTap: () =>
@@ -59,9 +62,10 @@ class CustomTicketStatus extends StatelessWidget {
 }
 
 class BuildTicketWidget extends StatelessWidget {
+  final Ticket ticket;
   final TicketType? ticketType;
 
-  const BuildTicketWidget({super.key, this.ticketType});
+  const BuildTicketWidget({super.key, this.ticketType, required this.ticket});
 
   @override
   Widget build(BuildContext context) {
@@ -113,13 +117,14 @@ class BuildTicketWidget extends StatelessWidget {
               child: Column(
                 children: [
                   const Spacer(),
-                  _infoItem("Ticket Number", "123456789"),
+                  _infoItem("Ticket Number", ticket.ticketNumber.toString()),
                   gapH8,
-                  _infoItem("Visitor Name", "Ahmed"),
+                  _infoItem("Visitor Name", ticket.userName ?? ''),
                   gapH8,
-                  _infoItem("Time", "07:80 AM"),
+                  _infoItem(
+                      "Time", DateFormat('hh:mm a').format(DateTime.now())),
                   gapH8,
-                  _infoItem("Ticket Type", "Standard"),
+                  _infoItem("Ticket Type", ticket.ticketType ?? ''),
                   const Spacer()
                 ],
               ),

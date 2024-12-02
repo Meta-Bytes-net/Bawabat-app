@@ -7,15 +7,16 @@ part of 'ticket.model.dart';
 // **************************************************************************
 
 Ticket _$TicketFromJson(Map<String, dynamic> json) => Ticket(
-      registrationNumber: (json['rn'] as num?)?.toInt(),
-      uid: (json['uid'] as num?)?.toInt(),
-      userName: json['un'] as String?,
+      ticketNumber: (json['ticket_number'] as num?)?.toInt(),
+      uid: (json['user_id'] as num?)?.toInt(),
+      userName: json['user_name'] as String?,
       msg: json['msg'] as String?,
-    );
+    )..ticketType = json['ticket_type'] as String?;
 
 Map<String, dynamic> _$TicketToJson(Ticket instance) => <String, dynamic>{
-      'rn': instance.registrationNumber,
-      'uid': instance.uid,
-      'un': instance.userName,
+      'ticket_number': instance.ticketNumber,
+      'user_id': instance.uid,
+      'user_name': instance.userName,
+      'ticket_type': instance.ticketType,
       'msg': instance.msg,
     };
