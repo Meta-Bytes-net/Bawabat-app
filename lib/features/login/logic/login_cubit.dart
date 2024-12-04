@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:bloc/bloc.dart';
 import 'package:bwabat/core/helpers/constants.dart';
 import 'package:bwabat/core/helpers/shared_pref_helper.dart';
+import 'package:bwabat/features/login/data/models/converted_keys.dart';
 import 'package:bwabat/features/login/data/models/login_request_body.dart';
 import 'package:bwabat/features/login/data/repos/auth_repo.dart';
 import 'package:bwabat/features/login/logic/login_state.dart';
@@ -27,8 +28,11 @@ class LoginCubit extends Cubit<LoginState> {
     ));
 
     response.when(success: (loginResponse) async {
-      await saveUserToken(loginResponse.data?.user?.token ?? '');
-      debugPrint('token----${loginResponse.data?.user?.token}');
+      await saveUserToken(loginResponse.accessToken ?? '');
+      print(loginResponse.encryptKey);
+
+      await SharedPrefHelper.cacheConvertedKeysSecurely(ConvertedKeys(
+          encryprionkey: loginResponse.encryptKey, iv: loginResponse.iv));
       emit(LoginState.loginSuccessState(loginResponse));
     }, failure: (error) {
       emit(LoginState.loginErrorState(error));

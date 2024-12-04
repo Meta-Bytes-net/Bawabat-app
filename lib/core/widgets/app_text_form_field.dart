@@ -1,5 +1,5 @@
 import 'package:bwabat/core/theming/colors.dart';
-import 'package:bwabat/core/theming/styles.dart';
+import 'package:bwabat/core/theming/text_styles.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 //
@@ -57,16 +57,39 @@ class AppTextFormField extends StatelessWidget {
           cursorRadius: Radius.circular(20.r),
           obscureText: isObscureText ?? false,
           validator: validator,
+
           controller: controller,
           enabled: isEnabled ?? true,
           maxLines: maxLine,
           onChanged: onChanged,
+          style: inputTextStyle ?? TextStyles.font15whiteMedium,
           decoration: InputDecoration(
-            labelStyle:
-                TextStyles.font20BlackExtraBold.copyWith(fontSize: 16.sp),
+            // labelStyle: TextStyles.font20BlackExtraBold.copyWith(
+            //     fontSize: 16.sp,
+            //     color: ColorsManager.primaryColor,
+            //     backgroundColor: const Color(0xFF081B33)),
             alignLabelWithHint: true,
-            fillColor: backgroundColor ?? Colors.white,
+            fillColor: backgroundColor ?? const Color.fromARGB(255, 36, 63, 99),
+            floatingLabelStyle: const TextStyle(color: Colors.white),
+            labelStyle: TextStyles.font15whiteMedium.copyWith(fontSize: 15.sp),
             labelText: label,
+            // label: Container(
+            //   padding: const EdgeInsets.all(5),
+            //   decoration: const BoxDecoration(
+            //     color: Color(0xFF081B33),
+            //     borderRadius: BorderRadius.only(
+            //       topLeft: Radius.circular(10),
+            //       topRight: Radius.circular(10),
+            //       bottomLeft: Radius.circular(10),
+            //       bottomRight: Radius.circular(10),
+            //     ),
+            //   ),
+            //   child: Text(
+            //     label,
+            //     style: TextStyles.font20BlackExtraBold
+            //         .copyWith(color: Colors.white, fontSize: 18),
+            //   ),
+            // ),
             isDense: false,
             contentPadding: contentPadding ??
                 EdgeInsets.symmetric(horizontal: 10.w, vertical: 15.h),
@@ -105,7 +128,7 @@ class AppTextFormField extends StatelessWidget {
             ),
             hintStyle: hintStyle ??
                 TextStyles.font30BlackExtraBold.copyWith(fontSize: 16.sp),
-            hintText: hintText,
+            // hintText: "asd",
             suffixIcon: suffixIcon,
             prefixIcon: prefixIcon,
             filled: true,

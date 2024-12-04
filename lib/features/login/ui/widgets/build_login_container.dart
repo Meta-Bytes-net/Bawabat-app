@@ -32,28 +32,12 @@ class _BuildLoginContainerState extends State<BuildLoginContainer> {
   void initState() {
     super.initState();
     passwordController = context.read<LoginCubit>().passwordController;
-    // setupPasswordControllerListener();
   }
-
-  // final _formKey = GlobalKey<FormBuilderState>();
-  // void setupPasswordControllerListener() {
-  //   passwordController.addListener(() {
-  //     setState(() {
-  //       hasLowercase = AppRegex.hasLowerCase(passwordController.text);
-  //       hasUppercase = AppRegex.hasUpperCase(passwordController.text);
-  //       hasSpecialCharacters =
-  //           AppRegex.hasSpecialCharacter(passwordController.text);
-  //       hasNumber = AppRegex.hasNumber(passwordController.text);
-  //       hasMinLength = AppRegex.hasMinLength(passwordController.text);
-  //     });
-  //   });
-  // }
 
   @override
   Widget build(BuildContext context) {
     return FormBuilder(
       key: context.read<LoginCubit>().formKey,
-      // autovalidateMode: AutovalidateMode.onUserInteraction,
       child: Column(
         children: [
           AppTextFormField(
@@ -93,7 +77,7 @@ class _BuildLoginContainerState extends State<BuildLoginContainer> {
                     textColor: Colors.white,
                     fontSize: 18,
                     // color: Theme.of(context).colorScheme.secondary,4
-                    backgroundColor: ColorsManager.primaryColor,
+                    backgroundColor: const Color.fromARGB(255, 25, 75, 136),
 
                     padding: const EdgeInsets.symmetric(vertical: 13),
                     onPressed: () => validateThenDoLogin(context),

@@ -1,48 +1,30 @@
-
-import 'package:bwabat/core/networking/api_error_model.dart';
-import 'package:bwabat/core/networking/base_response.dart';
 import 'package:json_annotation/json_annotation.dart';
 
 part 'login_response.g.dart';
 
-@JsonSerializable(genericArgumentFactories: true)
-class LoginResponse extends BaseResponse<Data?> {
+@JsonSerializable()
+class LoginResponse {
+  @JsonKey(name: 'access_token')
+  String? accessToken;
+  @JsonKey(name: 'token_type')
+  String? tokenType;
+  @JsonKey(name: 'event_name')
+  String? eventName;
+  @JsonKey(name: 'encrypt_key')
+  String? encryptKey;
+  String? iv;
+
   LoginResponse({
-    super.status,
-    super.data,
-    super.error,
+    this.accessToken,
+    this.tokenType,
+    this.eventName,
+    this.encryptKey,
+    this.iv,
   });
-  factory LoginResponse.fromJson(Map<String, dynamic> json) =>
-      _$LoginResponseFromJson(json);
-}
 
-@JsonSerializable(genericArgumentFactories: true)
-class Data {
-  String? token;
-  User? user;
+  factory LoginResponse.fromJson(Map<String, dynamic> json) {
+    return _$LoginResponseFromJson(json);
+  }
 
-  Data({this.token, this.user});
-
-  factory Data.fromJson(Map<String, dynamic> json) => _$DataFromJson(json);
-}
-
-@JsonSerializable(genericArgumentFactories: true)
-class User {
-  int? id;
-  String? email;
-  String? createdAt;
-  String? lastLogin;
-  // Null? sessionToken;
-  // Null? deletedAt;
-  String? token;
-
-  User(
-      {this.id,
-      this.email,
-      this.createdAt,
-      this.lastLogin,
-      // this.sessionToken,
-      // this.deletedAt,
-      this.token});
-  factory User.fromJson(Map<String, dynamic> json) => _$UserFromJson(json);
+  Map<String, dynamic> toJson() => _$LoginResponseToJson(this);
 }

@@ -1,11 +1,11 @@
 import 'package:bwabat/core/helpers/extensions.dart';
-import 'package:bwabat/features/home/logic/cubit/home_cubit.dart';
+import 'package:bwabat/features/main_layout/logic/home_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../../../core/networking/api_error_model.dart';
-import '../../../../core/theming/styles.dart';
+import '../../../../core/theming/text_styles.dart';
 
 class LoginBlocListener extends StatelessWidget {
   const LoginBlocListener({super.key});

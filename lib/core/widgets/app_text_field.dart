@@ -1,6 +1,5 @@
-
 import 'package:bwabat/core/theming/font_weight_helper.dart';
-import 'package:bwabat/core/theming/styles.dart';
+import 'package:bwabat/core/theming/text_styles.dart';
 import 'package:flutter/material.dart';
 //
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -64,7 +63,7 @@ class AppTextField extends StatelessWidget {
           isDense: false,
           // label: label != null ? Text(label!) : null,
           labelStyle: TextStyles.font15whiteMedium.copyWith(
-              // color: ColorsManager.saerchTextFieldHintColor, 
+              // color: ColorsManager.saerchTextFieldHintColor,
               fontSize: 17.sp),
           contentPadding: contentPadding ??
               EdgeInsets.symmetric(horizontal: 10.w, vertical: 15.h),

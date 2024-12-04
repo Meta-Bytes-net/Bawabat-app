@@ -1,4 +1,3 @@
-import 'package:bwabat/core/helpers/constants.dart';
 import 'package:bwabat/core/routing/app_router.dart';
 import 'package:bwabat/core/routing/routes.dart';
 import 'package:flutter/material.dart';
@@ -12,16 +11,16 @@ class BwabatApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ScreenUtilInit(
-        designSize: const Size(375, 812),
+        designSize: const Size(428, 926),
         minTextAdapt: true,
         child: MaterialApp(
           navigatorKey: NavigationService.navigatorkey,
-          title: 'Bulk App',
+          title: 'Bawabat',
           theme: ThemeData(
               // scaffoldBackgroundColor: ColorsManager.darkBackGround,
               ),
           debugShowCheckedModeBanner: false,
-          initialRoute:  Routes.loginScreen,
+          initialRoute: Routes.loginScreen,
           onGenerateRoute: appRouter.generateRoute,
         ));
   }

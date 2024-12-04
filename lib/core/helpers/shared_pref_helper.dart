@@ -1,3 +1,7 @@
+import 'dart:convert';
+
+import 'package:bwabat/core/helpers/constants.dart';
+import 'package:bwabat/features/login/data/models/converted_keys.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -97,5 +101,24 @@ class SharedPrefHelper {
     debugPrint('FlutterSecureStorage : data with key : $key has been removed');
     const flutterSecureStorage = FlutterSecureStorage();
     await flutterSecureStorage.delete(key: key);
+  }
+
+  static Future<void> cacheConvertedKeysSecurely(
+      ConvertedKeys convertedKeys) async {
+    final jsonString = jsonEncode(convertedKeys.toJson());
+    const flutterSecureStorage = FlutterSecureStorage();
+
+    await flutterSecureStorage.write(
+        key: SharedPrefKeys.convertedKeys, value: jsonString);
+  }
+
+  static Future<ConvertedKeys?> retrieveConvertedKeysSecurely() async {
+    const flutterSecureStorage = FlutterSecureStorage();
+    final jsonString =
+        await flutterSecureStorage.read(key: SharedPrefKeys.convertedKeys);
+    if (jsonString != null) {
+      return ConvertedKeys.fromJson(jsonDecode(jsonString));
+    }
+    return null;
   }
 }

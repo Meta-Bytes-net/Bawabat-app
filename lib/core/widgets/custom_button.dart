@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:vector_graphics/vector_graphics_compat.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
 class CustomButton extends StatelessWidget {
   final String text;
@@ -98,12 +98,10 @@ class CustomButton extends StatelessWidget {
               fontSize: fontSize?.sp ?? 11.sp),
         ),
         icon: iconPath != null
-            ? VectorGraphic(
+            ? SvgPicture.asset(
+                iconPath!,
                 height: 16.h,
                 width: 10.w,
-                loader: AssetBytesLoader(
-                  iconPath!,
-                ),
               )
             : icon != null
                 ? Icon(

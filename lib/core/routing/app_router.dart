@@ -2,6 +2,8 @@ import 'package:bwabat/core/di/dependency_injection.dart';
 import 'package:bwabat/core/routing/routes.dart';
 import 'package:bwabat/features/login/logic/login_cubit.dart';
 import 'package:bwabat/features/login/ui/screen/login_screen.dart';
+import 'package:bwabat/features/main_layout/ui/screen/main_layout.dart';
+import 'package:bwabat/features/main_layout/ui/screen/scan_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -18,7 +20,11 @@ class AppRouter {
           ),
         );
 
-      case Routes.homeScreen:
+      case Routes.scanScreen:
+        return MaterialPageRoute(
+          builder: (_) => const ScanScreen(),
+        );
+      case Routes.mainLayoutScreen:
         return PageRouteBuilder(
           transitionsBuilder: (context, animation, secondaryAnimation, child) {
             const begin = Offset(0.0, 1.0);
@@ -34,7 +40,7 @@ class AppRouter {
             );
           },
           pageBuilder: (context, animation, secondaryAnimation) =>
-              const Scaffold(),
+              const MainLayoutScreen(),
         );
 
       default:

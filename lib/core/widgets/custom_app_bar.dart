@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../theming/colors.dart';
-import '../theming/styles.dart';
+import '../theming/text_styles.dart';
 
 class MyCustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   final String title;
@@ -56,7 +56,7 @@ class MyCustomAppBar extends StatelessWidget implements PreferredSizeWidget {
             TextSpan(text: 'META ', style: TextStyles.font26whiteRegular),
             TextSpan(
               style: TextStyles.font26whiteRegular,
-                  // .copyWith(color: ColorsManager.containerTitleColor),
+              // .copyWith(color: ColorsManager.containerTitleColor),
               text: 'B',
             ),
           ],

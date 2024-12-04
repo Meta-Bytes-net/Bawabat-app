@@ -4,7 +4,7 @@ import 'package:bwabat/features/login/data/models/login_response.dart';
 import 'package:dio/dio.dart';
 import 'package:retrofit/retrofit.dart';
 
-import '../../features/home/data/models/scan_qr_request_body.dart';
+import '../../features/main_layout/data/models/scan_qr_request_body.dart';
 
 part 'api_service.g.dart';
 

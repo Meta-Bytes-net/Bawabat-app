@@ -1,6 +1,5 @@
 import 'package:bwabat/core/resources/app_assets.dart';
-import 'package:bwabat/core/theming/colors.dart';
-import 'package:bwabat/core/theming/styles.dart';
+import 'package:bwabat/core/theming/text_styles.dart';
 import 'package:bwabat/features/login/ui/widgets/login_bloc_listener.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
@@ -31,8 +30,8 @@ class LoginScreenBody extends StatelessWidget {
               height: 100,
               width: 100,
               Assets.svgsBawabatLogo,
-              colorFilter: const ColorFilter.mode(
-                  ColorsManager.primaryColor, BlendMode.srcIn),
+              colorFilter:
+                  const ColorFilter.mode(Colors.white, BlendMode.srcIn),
             ),
           )
               .animate()
@@ -47,8 +46,8 @@ class LoginScreenBody extends StatelessWidget {
               text: 'Welcome back!',
               duration: const Duration(seconds: 1),
               type: AnimationType.word,
-              textStyle: TextStyles.font20BlackExtraBold
-                  .copyWith(color: ColorsManager.midnightBlue),
+              textStyle:
+                  TextStyles.font20BlackExtraBold.copyWith(color: Colors.white),
             ),
           ),
           // Align(
@@ -62,11 +61,11 @@ class LoginScreenBody extends StatelessWidget {
               text: 'Please, Log in',
               duration: const Duration(seconds: 2),
               type: AnimationType.word,
-              textStyle: TextStyles.font30BlackExtraBold
-                  .copyWith(color: ColorsManager.midnightBlue),
+              textStyle:
+                  TextStyles.font30BlackExtraBold.copyWith(color: Colors.white),
             ),
           ),
-         
+
           const SizedBox(height: 20),
           const BuildLoginContainer(),
           const LoginBlocListener(),

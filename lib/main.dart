@@ -6,7 +6,6 @@ import 'package:bwabat/core/helpers/extensions.dart';
 import 'package:bwabat/core/helpers/shared_pref_helper.dart';
 import 'package:bwabat/core/routing/app_router.dart';
 import 'package:flutter/material.dart';
-
 import 'core/helpers/constants.dart';
 
 Future<void> main() async {
