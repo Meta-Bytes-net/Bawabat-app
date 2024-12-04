@@ -1,3 +1,4 @@
+import 'package:bwabat/core/helpers/constants.dart';
 import 'package:bwabat/core/routing/app_router.dart';
 import 'package:bwabat/core/routing/routes.dart';
 import 'package:flutter/material.dart';
@@ -20,7 +21,7 @@ class BwabatApp extends StatelessWidget {
               // scaffoldBackgroundColor: ColorsManager.darkBackGround,
               ),
           debugShowCheckedModeBanner: false,
-          initialRoute: Routes.loginScreen,
+          initialRoute:  isLoggedInUser ? Routes.mainLayoutScreen : Routes.loginScreen,
           onGenerateRoute: appRouter.generateRoute,
         ));
   }
