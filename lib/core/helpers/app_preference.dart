@@ -1,7 +1,6 @@
 import 'package:shared_preferences/shared_preferences.dart';
 
 const String prefsKeyIsUserLoggedIn = 'is_user_logged_in';
-const String prefsKeyIsManageAudinceOpened = 'is_manage_audience_opened';
 const String prefsKeyUserId = 'user_id';
 
 class AppPreferences {

@@ -1,4 +1,4 @@
-import 'package:bwabat/features/main_layout/data/models/ticket/ticket.model.dart';
+import 'package:bwabat/features/main_layout/data/models/ticket_model.dart';
 import 'package:bwabat/features/main_layout/ui/widgets/custom_ticket_status_screen.dart';
 import 'package:bwabat/features/main_layout/ui/widgets/default_home_screen.dart';
 import 'package:flutter/material.dart';

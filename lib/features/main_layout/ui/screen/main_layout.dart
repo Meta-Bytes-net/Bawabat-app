@@ -49,7 +49,6 @@ class _MainLayoutScreenState extends State<MainLayoutScreen>
         navBarHeight: 70,
         backgroundColor: Colors.black87,
 
-        
         isVisible: true,
         animationSettings: const NavBarAnimationSettings(
           navBarItemAnimation: ItemAnimationSettings(

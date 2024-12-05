@@ -1,6 +1,6 @@
 import 'package:bwabat/core/networking/api_error_handler.dart';
-import 'package:bwabat/features/login/data/models/login_request_body.dart';
-import 'package:bwabat/features/login/data/models/login_response.dart';
+import 'package:bwabat/features/main_layout/data/models/scan_qr_request_body.dart';
+import 'package:bwabat/features/main_layout/data/models/ticket_model.dart';
 
 import '../../../../core/networking/api_result.dart';
 import '../../../../core/networking/api_service.dart';
@@ -10,10 +10,10 @@ class HomeRepo {
 
   HomeRepo(this._apiService);
 
-  Future<ApiResult<LoginResponse>> login(
-      LoginRequestBody loginRequestBody) async {
+  Future<ApiResult<Ticket>> scanQrCode(
+      ScanQrRequestBody scanQrRequestBody) async {
     try {
-      final response = await _apiService.login(loginRequestBody);
+      final response = await _apiService.scanQrCode(scanQrRequestBody);
       return ApiResult.success(response);
     } catch (error) {
       return ApiResult.failure(ApiErrorHandler.handle(error));

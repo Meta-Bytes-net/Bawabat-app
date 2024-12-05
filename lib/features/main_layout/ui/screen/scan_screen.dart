@@ -1,12 +1,8 @@
-import 'dart:async';
-import 'dart:convert';
-
-import 'package:bwabat/core/helpers/encryption_manager.dart';
-import 'package:bwabat/core/helpers/shared_pref_helper.dart';
-import 'package:bwabat/features/login/data/models/converted_keys.dart';
-import 'package:bwabat/features/main_layout/data/models/ticket/ticket.model.dart';
+import 'package:bwabat/features/main_layout/data/models/ticket_model.dart';
+import 'package:bwabat/features/main_layout/logic/scan_cubit.dart';
 import 'package:bwabat/features/main_layout/ui/screen/home_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:mobile_scanner/mobile_scanner.dart';
 import 'package:persistent_bottom_nav_bar/persistent_bottom_nav_bar.dart';
 
@@ -20,120 +16,113 @@ class ScanScreen extends StatefulWidget {
 }
 
 class _ScanScreenState extends State<ScanScreen> with WidgetsBindingObserver {
-  final MobileScannerController controller = MobileScannerController(
-    formats: [BarcodeFormat.all],
-    detectionSpeed: DetectionSpeed.noDuplicates,
-  );
-
-  StreamSubscription<Object?>? _subscription;
-
-  bool _isNavigating = false; // Prevent duplicate navigation
-
-  @override
-  void didChangeAppLifecycleState(AppLifecycleState state) {
-    if (!controller.value.hasCameraPermission) {
-      return;
-    }
-
-    switch (state) {
-      case AppLifecycleState.detached:
-      case AppLifecycleState.hidden:
-      case AppLifecycleState.paused:
-        unawaited(_subscription?.cancel());
-        _subscription = null;
-        unawaited(controller.stop());
-        break;
-
-      case AppLifecycleState.resumed:
-        if (!_isNavigating) {
-          _subscription = controller.barcodes.listen(_handleBarcode);
-          unawaited(controller.start());
-        }
-        break;
-
-      case AppLifecycleState.inactive:
-        unawaited(_subscription?.cancel());
-        _subscription = null;
-        unawaited(controller.stop());
-        break;
-    }
-  }
+  late ScanCubit _scanCubit;
 
   @override
   void initState() {
     super.initState();
     WidgetsBinding.instance.addObserver(this);
-    _subscription = controller.barcodes.listen(_handleBarcode);
-    unawaited(controller.start());
+    _scanCubit = context.read<ScanCubit>();
+    // _scanCubit.startScanning();
   }
 
   @override
-  Future<void> dispose() async {
+  void dispose() {
     WidgetsBinding.instance.removeObserver(this);
-    unawaited(_subscription?.cancel());
-    _subscription = null;
+    _scanCubit.dispose();
     super.dispose();
-    await controller
-        .dispose(); // Dispose the controller when the widget is disposed
+  }
+
+  @override
+  void didChangeAppLifecycleState(AppLifecycleState state) {
+    _scanCubit.handleAppLifecycleState(state);
   }
 
   /// Handle scanned barcode
-  Future<void> _handleBarcode(BarcodeCapture barcodeCapture) async {
-    if (!mounted || _isNavigating) return;
+  // Future<void> _handleBarcodeOffline(BarcodeCapture barcodeCapture) async {
+  //   if (!mounted || _isNavigating) return;
 
-    final List<Barcode> barcodes = barcodeCapture.barcodes;
-    if (barcodes.isNotEmpty) {
-      final String? value = barcodes.first.rawValue;
+  //   final List<Barcode> barcodes = barcodeCapture.barcodes;
+  //   if (barcodes.isNotEmpty) {
+  //     final String? value = barcodes.first.rawValue;
 
-      if (value != null) {
-        debugPrint('Scanned Barcode: $value');
-        setState(() {
-          _isNavigating = true; // Prevent further scans
-        });
-        ConvertedKeys? convertedKeys =
-            await SharedPrefHelper.retrieveConvertedKeysSecurely();
-        String? decryptData = EncryptionManager.decryptData(
-          value,
-          convertedKeys ?? ConvertedKeys(encryprionkey: null, iv: null),
-        );
-        Ticket convertedStringToTicket =
-            Ticket.fromJson(jsonDecode(decryptData ?? '{}'));
-        if (mounted) {
-          PersistentNavBarNavigator.pushNewScreenWithRouteSettings(
-            context,
-            settings: RouteSettings(
-                name: Routes.homeScreen, arguments: convertedStringToTicket),
-            screen: convertedStringToTicket.ticketNumber == null
-                ? const HomeScreen(
-                    ticketType: TicketType.error,
-                  )
-                : const HomeScreen(
-                    ticketType: TicketType.success,
-                  ),
-            withNavBar: true,
-            pageTransitionAnimation: PageTransitionAnimation.scale,
-          ).then((_) {
-            // Reset the navigation state when returning to this screen
-            setState(() {
-              _isNavigating = false;
-            });
-          });
-        }
+  //     if (value != null) {
+  //       debugPrint('Scanned Barcode: $value');
+  //       setState(() {
+  //         _isNavigating = true; // Prevent further scans
+  //       });
+  //       ConvertedKeys? convertedKeys =
+  //           await SharedPrefHelper.retrieveConvertedKeysSecurely();
+  //       String? decryptData = EncryptionManager.decryptData(
+  //         value,
+  //         convertedKeys ?? ConvertedKeys(encryprionkey: null, iv: null),
+  //       );
+  //       Ticket convertedStringToTicket =
+  //           Ticket.fromJson(jsonDecode(decryptData ?? '{}'));
+  //       if (mounted) {
+  //         PersistentNavBarNavigator.pushNewScreenWithRouteSettings(
+  //           context,
+  //           settings: RouteSettings(
+  //               name: Routes.homeScreen, arguments: convertedStringToTicket),
+  //           screen: convertedStringToTicket.ticketNumber == null
+  //               ? const HomeScreen(
+  //                   ticketType: TicketType.error,
+  //                 )
+  //               : const HomeScreen(
+  //                   ticketType: TicketType.success,
+  //                 ),
+  //           withNavBar: true,
+  //           pageTransitionAnimation: PageTransitionAnimation.scale,
+  //         ).then((_) {
+  //           // Reset the navigation state when returning to this screen
+  //           setState(() {
+  //             _isNavigating = false;
+  //           });
+  //         });
+  //       }
 
-        unawaited(_subscription?.cancel()); // Stop listening for barcodes
-        _subscription = null;
-        unawaited(controller.stop()); // Stop the scanner during navigation
-      }
-    }
-  }
+  //       unawaited(_subscription?.cancel()); // Stop listening for barcodes
+  //       _subscription = null;
+  //       unawaited(controller.stop()); // Stop the scanner during navigation
+  //     }
+  //   }
+  // }
 
   @override
   Widget build(BuildContext context) {
-    return MobileScanner(
-      controller: controller,
-      onDetect: (BarcodeCapture capture) {
-        _handleBarcode(capture);
+    return BlocListener<ScanCubit, ScanState>(
+      listener: (context, state) async {
+        if (state is ScanNavigationState) {
+          final Ticket ticket = state.ticket ?? Ticket();
+          await PersistentNavBarNavigator.pushNewScreenWithRouteSettings(
+            context,
+            settings: RouteSettings(
+              name: Routes.homeScreen,
+              arguments: ticket,
+            ),
+            screen: HomeScreen(
+              ticketType: ticket.ticketNumber == null
+                  ? TicketType.error
+                  : TicketType.success,
+            ),
+            withNavBar: true,
+            pageTransitionAnimation: PageTransitionAnimation.scale,
+          );
+
+          // Allow further navigation after returning
+          _scanCubit.completeNavigation();
+        } else if (state is ScanErrorState) {
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(content: Text(state.error.getAllErrorMessages())),
+          );
+        }
       },
+      child: MobileScanner(
+        controller: _scanCubit.controller,
+        onDetect: (BarcodeCapture capture) {
+          // _handleBarcodeOffline(capture);
+        },
+      ),
     );
   }
 }

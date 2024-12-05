@@ -1,6 +1,6 @@
 import 'package:json_annotation/json_annotation.dart';
 
-part 'ticket.model.g.dart';
+part 'ticket_model.g.dart';
 
 @JsonSerializable()
 class Ticket {
@@ -15,7 +15,8 @@ class Ticket {
   String? ticketType;
   String? msg;
 
-  Ticket({this.ticketNumber, this.uid, this.userName, this.msg});
+  Ticket(
+      {this.ticketNumber, this.uid, this.userName, this.msg, this.ticketType});
 
   factory Ticket.fromJson(Map<String, dynamic> json) {
     return _$TicketFromJson(json);

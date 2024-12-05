@@ -1,6 +1,7 @@
 import 'package:bwabat/core/networking/api_constants.dart';
 import 'package:bwabat/features/login/data/models/login_request_body.dart';
 import 'package:bwabat/features/login/data/models/login_response.dart';
+import 'package:bwabat/features/main_layout/data/models/ticket_model.dart';
 import 'package:dio/dio.dart';
 import 'package:retrofit/retrofit.dart';
 
@@ -18,7 +19,7 @@ abstract class ApiService {
   );
   @POST(ApiConstants.scanQrCode)
   // Todo: change return type to ScanQrResponse
-  Future<LoginResponse> scanQrCode(
+  Future<Ticket> scanQrCode(
     @Body() ScanQrRequestBody scanQrRequestBody,
   );
 }
