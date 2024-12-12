@@ -1,9 +1,9 @@
 import 'package:bwabat/core/helpers/extensions.dart';
 import 'package:bwabat/core/resources/app_assets.dart';
 import 'package:bwabat/core/resources/sizes.dart';
-import 'package:bwabat/features/main_layout/data/models/ticket_model.dart';
 import 'package:bwabat/features/main_layout/ui/screen/home_screen.dart';
 import 'package:bwabat/features/main_layout/ui/screen/main_layout.dart';
+import 'package:bwabat/features/scan/data/models/ticket_model.dart';
 import 'package:dotted_line/dotted_line.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';

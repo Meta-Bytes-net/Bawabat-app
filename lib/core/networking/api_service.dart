@@ -1,11 +1,12 @@
 import 'package:bwabat/core/networking/api_constants.dart';
 import 'package:bwabat/features/login/data/models/login_request_body.dart';
 import 'package:bwabat/features/login/data/models/login_response.dart';
-import 'package:bwabat/features/main_layout/data/models/ticket_model.dart';
 import 'package:dio/dio.dart';
 import 'package:retrofit/retrofit.dart';
 
-import '../../features/main_layout/data/models/scan_qr_request_body.dart';
+import '../../features/scan/data/models/scan_qr_request_body.dart';
+import '../../features/scan/data/models/ticket_model.dart';
+
 
 part 'api_service.g.dart';
 

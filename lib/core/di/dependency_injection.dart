@@ -3,7 +3,7 @@ import 'package:bwabat/core/networking/api_service.dart';
 import 'package:bwabat/features/login/data/repos/auth_repo.dart';
 import 'package:bwabat/features/login/logic/login_cubit.dart';
 import 'package:bwabat/features/main_layout/data/repos/home_repo.dart';
-import 'package:bwabat/features/main_layout/logic/scan_cubit.dart';
+import 'package:bwabat/features/scan/logic/scan_cubit.dart';
 import 'package:dio/dio.dart';
 import 'package:get_it/get_it.dart';
 import 'package:shared_preferences/shared_preferences.dart';

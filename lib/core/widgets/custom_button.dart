@@ -79,35 +79,38 @@ class CustomButton extends StatelessWidget {
   }
   @override
   Widget build(BuildContext context) {
-    return ElevatedButton.icon(
-        onPressed: isDisabled == true ? null : onPressed,
-        iconAlignment: textDirection == TextDirection.ltr
-            ? IconAlignment.start
-            : IconAlignment.end,
-        style: ElevatedButton.styleFrom(
-          backgroundColor: backgroundColor,
-          // disabledBackgroundColor: backgroundColor ?? ColorsManager.buttonColor,
-          minimumSize: Size.zero,
-          padding:
-              padding ?? EdgeInsets.symmetric(vertical: 9.h, horizontal: 0),
-        ),
-        label: Text(
-          text,
-          style: TextStyle(
-              color: textColor ?? Colors.black,
-              fontSize: fontSize?.sp ?? 11.sp),
-        ),
-        icon: iconPath != null
-            ? SvgPicture.asset(
-                iconPath!,
-                height: 16.h,
-                width: 10.w,
-              )
-            : icon != null
-                ? Icon(
-                    icon,
-                    color: Colors.black87,
-                  )
-                : null);
+    return SizedBox(
+      width: double.infinity,
+      child: ElevatedButton.icon(
+          onPressed: isDisabled == true ? null : onPressed,
+          iconAlignment: textDirection == TextDirection.ltr
+              ? IconAlignment.start
+              : IconAlignment.end,
+          style: ElevatedButton.styleFrom(
+            backgroundColor: backgroundColor,
+            // disabledBackgroundColor: backgroundColor ?? ColorsManager.buttonColor,
+            minimumSize: Size.zero,
+            padding:
+                padding ?? EdgeInsets.symmetric(vertical: 9.h, horizontal: 0),
+          ),
+          label: Text(
+            text,
+            style: TextStyle(
+                color: textColor ?? Colors.black,
+                fontSize: fontSize?.sp ?? 11.sp),
+          ),
+          icon: iconPath != null
+              ? SvgPicture.asset(
+                  iconPath!,
+                  height: 16.h,
+                  width: 10.w,
+                )
+              : icon != null
+                  ? Icon(
+                      icon,
+                      color: Colors.black87,
+                    )
+                  : null),
+    );
   }
 }

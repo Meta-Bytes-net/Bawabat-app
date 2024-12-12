@@ -7,9 +7,9 @@ import 'package:bwabat/core/helpers/encryption_manager.dart';
 import 'package:bwabat/core/helpers/shared_pref_helper.dart';
 import 'package:bwabat/core/networking/api_error_model.dart';
 import 'package:bwabat/features/login/data/models/converted_keys.dart';
-import 'package:bwabat/features/main_layout/data/models/scan_qr_request_body.dart';
-import 'package:bwabat/features/main_layout/data/models/ticket_model.dart';
-import 'package:bwabat/features/main_layout/data/repos/home_repo.dart';
+import 'package:bwabat/features/scan/data/models/scan_qr_request_body.dart';
+import 'package:bwabat/features/scan/data/models/ticket_model.dart';
+import 'package:bwabat/features/scan/data/repos/scan_repo.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -20,12 +20,12 @@ part 'scan_cubit.freezed.dart';
 part 'scan_state.dart';
 
 class ScanCubit extends Cubit<ScanState> {
-  final HomeRepo _homeRepo;
+  final ScanRepo _scanRepo;
   // late final bool isOnline;
   // late MobileScannerController controller;
 
   // StreamSubscription<Object?>? _subscription;
-  ScanCubit(this._homeRepo) : super(const ScanState.initial());
+  ScanCubit(this._scanRepo) : super(const ScanState.initial());
 
   final MobileScannerController controller = MobileScannerController(
     formats: [BarcodeFormat.all],
@@ -118,7 +118,7 @@ class ScanCubit extends Cubit<ScanState> {
   Future<void> _processBarcodeOnline(String qrCode) async {
     emit(const ScanOnlineLoadingState());
     final response =
-        await _homeRepo.scanQrCode(ScanQrRequestBody(qrCode: qrCode));
+        await _scanRepo.scanQrCode(ScanQrRequestBody(qrCode: qrCode));
 
     response.when(success: (onlineTicket) {
       if (kDebugMode) {

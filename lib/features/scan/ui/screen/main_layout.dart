@@ -1,11 +1,10 @@
 import 'package:bwabat/core/resources/app_assets.dart';
 import 'package:bwabat/features/main_layout/ui/screen/home_screen.dart';
+import 'package:bwabat/features/scan/data/models/ticket_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:persistent_bottom_nav_bar/persistent_bottom_nav_bar.dart';
-
-import '../../../scan/data/models/ticket_model.dart';
 
 class MainLayoutScreen extends StatefulWidget {
   final TicketType? ticketType;
@@ -62,6 +61,7 @@ class _MainLayoutScreenState extends State<MainLayoutScreen>
           ),
           navBarHeight: 70,
           backgroundColor: Colors.black87,
+
           isVisible: true,
           animationSettings: const NavBarAnimationSettings(
             navBarItemAnimation: ItemAnimationSettings(
