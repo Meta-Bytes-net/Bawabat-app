@@ -20,6 +20,7 @@ mixin _$ScanState {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() scanScanningState,
+    required TResult Function() scanOnlineLoadingState,
     required TResult Function(ApiErrorModel error) scanErrorState,
     required TResult Function(String? barcodeData) scanProcessingState,
     required TResult Function(Ticket? ticket) scanNavigationState,
@@ -29,6 +30,7 @@ mixin _$ScanState {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? scanScanningState,
+    TResult? Function()? scanOnlineLoadingState,
     TResult? Function(ApiErrorModel error)? scanErrorState,
     TResult? Function(String? barcodeData)? scanProcessingState,
     TResult? Function(Ticket? ticket)? scanNavigationState,
@@ -38,6 +40,7 @@ mixin _$ScanState {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? scanScanningState,
+    TResult Function()? scanOnlineLoadingState,
     TResult Function(ApiErrorModel error)? scanErrorState,
     TResult Function(String? barcodeData)? scanProcessingState,
     TResult Function(Ticket? ticket)? scanNavigationState,
@@ -48,6 +51,8 @@ mixin _$ScanState {
   TResult map<TResult extends Object?>({
     required TResult Function(_Initial value) initial,
     required TResult Function(ScanScanningState value) scanScanningState,
+    required TResult Function(ScanOnlineLoadingState value)
+        scanOnlineLoadingState,
     required TResult Function(ScanErrorState value) scanErrorState,
     required TResult Function(ScanProcessingState value) scanProcessingState,
     required TResult Function(ScanNavigationState value) scanNavigationState,
@@ -57,6 +62,7 @@ mixin _$ScanState {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Initial value)? initial,
     TResult? Function(ScanScanningState value)? scanScanningState,
+    TResult? Function(ScanOnlineLoadingState value)? scanOnlineLoadingState,
     TResult? Function(ScanErrorState value)? scanErrorState,
     TResult? Function(ScanProcessingState value)? scanProcessingState,
     TResult? Function(ScanNavigationState value)? scanNavigationState,
@@ -66,6 +72,7 @@ mixin _$ScanState {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Initial value)? initial,
     TResult Function(ScanScanningState value)? scanScanningState,
+    TResult Function(ScanOnlineLoadingState value)? scanOnlineLoadingState,
     TResult Function(ScanErrorState value)? scanErrorState,
     TResult Function(ScanProcessingState value)? scanProcessingState,
     TResult Function(ScanNavigationState value)? scanNavigationState,
@@ -115,12 +122,18 @@ class __$$InitialImplCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$InitialImpl implements _Initial {
+class _$InitialImpl with DiagnosticableTreeMixin implements _Initial {
   const _$InitialImpl();
 
   @override
-  String toString() {
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
     return 'ScanState.initial()';
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(DiagnosticsProperty('type', 'ScanState.initial'));
   }
 
   @override
@@ -137,6 +150,7 @@ class _$InitialImpl implements _Initial {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() scanScanningState,
+    required TResult Function() scanOnlineLoadingState,
     required TResult Function(ApiErrorModel error) scanErrorState,
     required TResult Function(String? barcodeData) scanProcessingState,
     required TResult Function(Ticket? ticket) scanNavigationState,
@@ -149,6 +163,7 @@ class _$InitialImpl implements _Initial {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? scanScanningState,
+    TResult? Function()? scanOnlineLoadingState,
     TResult? Function(ApiErrorModel error)? scanErrorState,
     TResult? Function(String? barcodeData)? scanProcessingState,
     TResult? Function(Ticket? ticket)? scanNavigationState,
@@ -161,6 +176,7 @@ class _$InitialImpl implements _Initial {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? scanScanningState,
+    TResult Function()? scanOnlineLoadingState,
     TResult Function(ApiErrorModel error)? scanErrorState,
     TResult Function(String? barcodeData)? scanProcessingState,
     TResult Function(Ticket? ticket)? scanNavigationState,
@@ -177,6 +193,8 @@ class _$InitialImpl implements _Initial {
   TResult map<TResult extends Object?>({
     required TResult Function(_Initial value) initial,
     required TResult Function(ScanScanningState value) scanScanningState,
+    required TResult Function(ScanOnlineLoadingState value)
+        scanOnlineLoadingState,
     required TResult Function(ScanErrorState value) scanErrorState,
     required TResult Function(ScanProcessingState value) scanProcessingState,
     required TResult Function(ScanNavigationState value) scanNavigationState,
@@ -189,6 +207,7 @@ class _$InitialImpl implements _Initial {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Initial value)? initial,
     TResult? Function(ScanScanningState value)? scanScanningState,
+    TResult? Function(ScanOnlineLoadingState value)? scanOnlineLoadingState,
     TResult? Function(ScanErrorState value)? scanErrorState,
     TResult? Function(ScanProcessingState value)? scanProcessingState,
     TResult? Function(ScanNavigationState value)? scanNavigationState,
@@ -201,6 +220,7 @@ class _$InitialImpl implements _Initial {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Initial value)? initial,
     TResult Function(ScanScanningState value)? scanScanningState,
+    TResult Function(ScanOnlineLoadingState value)? scanOnlineLoadingState,
     TResult Function(ScanErrorState value)? scanErrorState,
     TResult Function(ScanProcessingState value)? scanProcessingState,
     TResult Function(ScanNavigationState value)? scanNavigationState,
@@ -238,12 +258,20 @@ class __$$ScanScanningStateImplCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$ScanScanningStateImpl implements ScanScanningState {
+class _$ScanScanningStateImpl
+    with DiagnosticableTreeMixin
+    implements ScanScanningState {
   const _$ScanScanningStateImpl();
 
   @override
-  String toString() {
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
     return 'ScanState.scanScanningState()';
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(DiagnosticsProperty('type', 'ScanState.scanScanningState'));
   }
 
   @override
@@ -260,6 +288,7 @@ class _$ScanScanningStateImpl implements ScanScanningState {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() scanScanningState,
+    required TResult Function() scanOnlineLoadingState,
     required TResult Function(ApiErrorModel error) scanErrorState,
     required TResult Function(String? barcodeData) scanProcessingState,
     required TResult Function(Ticket? ticket) scanNavigationState,
@@ -272,6 +301,7 @@ class _$ScanScanningStateImpl implements ScanScanningState {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? scanScanningState,
+    TResult? Function()? scanOnlineLoadingState,
     TResult? Function(ApiErrorModel error)? scanErrorState,
     TResult? Function(String? barcodeData)? scanProcessingState,
     TResult? Function(Ticket? ticket)? scanNavigationState,
@@ -284,6 +314,7 @@ class _$ScanScanningStateImpl implements ScanScanningState {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? scanScanningState,
+    TResult Function()? scanOnlineLoadingState,
     TResult Function(ApiErrorModel error)? scanErrorState,
     TResult Function(String? barcodeData)? scanProcessingState,
     TResult Function(Ticket? ticket)? scanNavigationState,
@@ -300,6 +331,8 @@ class _$ScanScanningStateImpl implements ScanScanningState {
   TResult map<TResult extends Object?>({
     required TResult Function(_Initial value) initial,
     required TResult Function(ScanScanningState value) scanScanningState,
+    required TResult Function(ScanOnlineLoadingState value)
+        scanOnlineLoadingState,
     required TResult Function(ScanErrorState value) scanErrorState,
     required TResult Function(ScanProcessingState value) scanProcessingState,
     required TResult Function(ScanNavigationState value) scanNavigationState,
@@ -312,6 +345,7 @@ class _$ScanScanningStateImpl implements ScanScanningState {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Initial value)? initial,
     TResult? Function(ScanScanningState value)? scanScanningState,
+    TResult? Function(ScanOnlineLoadingState value)? scanOnlineLoadingState,
     TResult? Function(ScanErrorState value)? scanErrorState,
     TResult? Function(ScanProcessingState value)? scanProcessingState,
     TResult? Function(ScanNavigationState value)? scanNavigationState,
@@ -324,6 +358,7 @@ class _$ScanScanningStateImpl implements ScanScanningState {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Initial value)? initial,
     TResult Function(ScanScanningState value)? scanScanningState,
+    TResult Function(ScanOnlineLoadingState value)? scanOnlineLoadingState,
     TResult Function(ScanErrorState value)? scanErrorState,
     TResult Function(ScanProcessingState value)? scanProcessingState,
     TResult Function(ScanNavigationState value)? scanNavigationState,
@@ -338,6 +373,148 @@ class _$ScanScanningStateImpl implements ScanScanningState {
 
 abstract class ScanScanningState implements ScanState {
   const factory ScanScanningState() = _$ScanScanningStateImpl;
+}
+
+/// @nodoc
+abstract class _$$ScanOnlineLoadingStateImplCopyWith<$Res> {
+  factory _$$ScanOnlineLoadingStateImplCopyWith(
+          _$ScanOnlineLoadingStateImpl value,
+          $Res Function(_$ScanOnlineLoadingStateImpl) then) =
+      __$$ScanOnlineLoadingStateImplCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$$ScanOnlineLoadingStateImplCopyWithImpl<$Res>
+    extends _$ScanStateCopyWithImpl<$Res, _$ScanOnlineLoadingStateImpl>
+    implements _$$ScanOnlineLoadingStateImplCopyWith<$Res> {
+  __$$ScanOnlineLoadingStateImplCopyWithImpl(
+      _$ScanOnlineLoadingStateImpl _value,
+      $Res Function(_$ScanOnlineLoadingStateImpl) _then)
+      : super(_value, _then);
+
+  /// Create a copy of ScanState
+  /// with the given fields replaced by the non-null parameter values.
+}
+
+/// @nodoc
+
+class _$ScanOnlineLoadingStateImpl
+    with DiagnosticableTreeMixin
+    implements ScanOnlineLoadingState {
+  const _$ScanOnlineLoadingStateImpl();
+
+  @override
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
+    return 'ScanState.scanOnlineLoadingState()';
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties
+        .add(DiagnosticsProperty('type', 'ScanState.scanOnlineLoadingState'));
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$ScanOnlineLoadingStateImpl);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() initial,
+    required TResult Function() scanScanningState,
+    required TResult Function() scanOnlineLoadingState,
+    required TResult Function(ApiErrorModel error) scanErrorState,
+    required TResult Function(String? barcodeData) scanProcessingState,
+    required TResult Function(Ticket? ticket) scanNavigationState,
+  }) {
+    return scanOnlineLoadingState();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? initial,
+    TResult? Function()? scanScanningState,
+    TResult? Function()? scanOnlineLoadingState,
+    TResult? Function(ApiErrorModel error)? scanErrorState,
+    TResult? Function(String? barcodeData)? scanProcessingState,
+    TResult? Function(Ticket? ticket)? scanNavigationState,
+  }) {
+    return scanOnlineLoadingState?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? initial,
+    TResult Function()? scanScanningState,
+    TResult Function()? scanOnlineLoadingState,
+    TResult Function(ApiErrorModel error)? scanErrorState,
+    TResult Function(String? barcodeData)? scanProcessingState,
+    TResult Function(Ticket? ticket)? scanNavigationState,
+    required TResult orElse(),
+  }) {
+    if (scanOnlineLoadingState != null) {
+      return scanOnlineLoadingState();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Initial value) initial,
+    required TResult Function(ScanScanningState value) scanScanningState,
+    required TResult Function(ScanOnlineLoadingState value)
+        scanOnlineLoadingState,
+    required TResult Function(ScanErrorState value) scanErrorState,
+    required TResult Function(ScanProcessingState value) scanProcessingState,
+    required TResult Function(ScanNavigationState value) scanNavigationState,
+  }) {
+    return scanOnlineLoadingState(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_Initial value)? initial,
+    TResult? Function(ScanScanningState value)? scanScanningState,
+    TResult? Function(ScanOnlineLoadingState value)? scanOnlineLoadingState,
+    TResult? Function(ScanErrorState value)? scanErrorState,
+    TResult? Function(ScanProcessingState value)? scanProcessingState,
+    TResult? Function(ScanNavigationState value)? scanNavigationState,
+  }) {
+    return scanOnlineLoadingState?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Initial value)? initial,
+    TResult Function(ScanScanningState value)? scanScanningState,
+    TResult Function(ScanOnlineLoadingState value)? scanOnlineLoadingState,
+    TResult Function(ScanErrorState value)? scanErrorState,
+    TResult Function(ScanProcessingState value)? scanProcessingState,
+    TResult Function(ScanNavigationState value)? scanNavigationState,
+    required TResult orElse(),
+  }) {
+    if (scanOnlineLoadingState != null) {
+      return scanOnlineLoadingState(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class ScanOnlineLoadingState implements ScanState {
+  const factory ScanOnlineLoadingState() = _$ScanOnlineLoadingStateImpl;
 }
 
 /// @nodoc
@@ -375,15 +552,25 @@ class __$$ScanErrorStateImplCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$ScanErrorStateImpl implements ScanErrorState {
+class _$ScanErrorStateImpl
+    with DiagnosticableTreeMixin
+    implements ScanErrorState {
   const _$ScanErrorStateImpl(this.error);
 
   @override
   final ApiErrorModel error;
 
   @override
-  String toString() {
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
     return 'ScanState.scanErrorState(error: $error)';
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties
+      ..add(DiagnosticsProperty('type', 'ScanState.scanErrorState'))
+      ..add(DiagnosticsProperty('error', error));
   }
 
   @override
@@ -411,6 +598,7 @@ class _$ScanErrorStateImpl implements ScanErrorState {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() scanScanningState,
+    required TResult Function() scanOnlineLoadingState,
     required TResult Function(ApiErrorModel error) scanErrorState,
     required TResult Function(String? barcodeData) scanProcessingState,
     required TResult Function(Ticket? ticket) scanNavigationState,
@@ -423,6 +611,7 @@ class _$ScanErrorStateImpl implements ScanErrorState {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? scanScanningState,
+    TResult? Function()? scanOnlineLoadingState,
     TResult? Function(ApiErrorModel error)? scanErrorState,
     TResult? Function(String? barcodeData)? scanProcessingState,
     TResult? Function(Ticket? ticket)? scanNavigationState,
@@ -435,6 +624,7 @@ class _$ScanErrorStateImpl implements ScanErrorState {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? scanScanningState,
+    TResult Function()? scanOnlineLoadingState,
     TResult Function(ApiErrorModel error)? scanErrorState,
     TResult Function(String? barcodeData)? scanProcessingState,
     TResult Function(Ticket? ticket)? scanNavigationState,
@@ -451,6 +641,8 @@ class _$ScanErrorStateImpl implements ScanErrorState {
   TResult map<TResult extends Object?>({
     required TResult Function(_Initial value) initial,
     required TResult Function(ScanScanningState value) scanScanningState,
+    required TResult Function(ScanOnlineLoadingState value)
+        scanOnlineLoadingState,
     required TResult Function(ScanErrorState value) scanErrorState,
     required TResult Function(ScanProcessingState value) scanProcessingState,
     required TResult Function(ScanNavigationState value) scanNavigationState,
@@ -463,6 +655,7 @@ class _$ScanErrorStateImpl implements ScanErrorState {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Initial value)? initial,
     TResult? Function(ScanScanningState value)? scanScanningState,
+    TResult? Function(ScanOnlineLoadingState value)? scanOnlineLoadingState,
     TResult? Function(ScanErrorState value)? scanErrorState,
     TResult? Function(ScanProcessingState value)? scanProcessingState,
     TResult? Function(ScanNavigationState value)? scanNavigationState,
@@ -475,6 +668,7 @@ class _$ScanErrorStateImpl implements ScanErrorState {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Initial value)? initial,
     TResult Function(ScanScanningState value)? scanScanningState,
+    TResult Function(ScanOnlineLoadingState value)? scanOnlineLoadingState,
     TResult Function(ScanErrorState value)? scanErrorState,
     TResult Function(ScanProcessingState value)? scanProcessingState,
     TResult Function(ScanNavigationState value)? scanNavigationState,
@@ -535,15 +729,25 @@ class __$$ScanProcessingStateImplCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$ScanProcessingStateImpl implements ScanProcessingState {
+class _$ScanProcessingStateImpl
+    with DiagnosticableTreeMixin
+    implements ScanProcessingState {
   const _$ScanProcessingStateImpl({this.barcodeData});
 
   @override
   final String? barcodeData;
 
   @override
-  String toString() {
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
     return 'ScanState.scanProcessingState(barcodeData: $barcodeData)';
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties
+      ..add(DiagnosticsProperty('type', 'ScanState.scanProcessingState'))
+      ..add(DiagnosticsProperty('barcodeData', barcodeData));
   }
 
   @override
@@ -572,6 +776,7 @@ class _$ScanProcessingStateImpl implements ScanProcessingState {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() scanScanningState,
+    required TResult Function() scanOnlineLoadingState,
     required TResult Function(ApiErrorModel error) scanErrorState,
     required TResult Function(String? barcodeData) scanProcessingState,
     required TResult Function(Ticket? ticket) scanNavigationState,
@@ -584,6 +789,7 @@ class _$ScanProcessingStateImpl implements ScanProcessingState {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? scanScanningState,
+    TResult? Function()? scanOnlineLoadingState,
     TResult? Function(ApiErrorModel error)? scanErrorState,
     TResult? Function(String? barcodeData)? scanProcessingState,
     TResult? Function(Ticket? ticket)? scanNavigationState,
@@ -596,6 +802,7 @@ class _$ScanProcessingStateImpl implements ScanProcessingState {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? scanScanningState,
+    TResult Function()? scanOnlineLoadingState,
     TResult Function(ApiErrorModel error)? scanErrorState,
     TResult Function(String? barcodeData)? scanProcessingState,
     TResult Function(Ticket? ticket)? scanNavigationState,
@@ -612,6 +819,8 @@ class _$ScanProcessingStateImpl implements ScanProcessingState {
   TResult map<TResult extends Object?>({
     required TResult Function(_Initial value) initial,
     required TResult Function(ScanScanningState value) scanScanningState,
+    required TResult Function(ScanOnlineLoadingState value)
+        scanOnlineLoadingState,
     required TResult Function(ScanErrorState value) scanErrorState,
     required TResult Function(ScanProcessingState value) scanProcessingState,
     required TResult Function(ScanNavigationState value) scanNavigationState,
@@ -624,6 +833,7 @@ class _$ScanProcessingStateImpl implements ScanProcessingState {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Initial value)? initial,
     TResult? Function(ScanScanningState value)? scanScanningState,
+    TResult? Function(ScanOnlineLoadingState value)? scanOnlineLoadingState,
     TResult? Function(ScanErrorState value)? scanErrorState,
     TResult? Function(ScanProcessingState value)? scanProcessingState,
     TResult? Function(ScanNavigationState value)? scanNavigationState,
@@ -636,6 +846,7 @@ class _$ScanProcessingStateImpl implements ScanProcessingState {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Initial value)? initial,
     TResult Function(ScanScanningState value)? scanScanningState,
+    TResult Function(ScanOnlineLoadingState value)? scanOnlineLoadingState,
     TResult Function(ScanErrorState value)? scanErrorState,
     TResult Function(ScanProcessingState value)? scanProcessingState,
     TResult Function(ScanNavigationState value)? scanNavigationState,
@@ -696,15 +907,25 @@ class __$$ScanNavigationStateImplCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$ScanNavigationStateImpl implements ScanNavigationState {
+class _$ScanNavigationStateImpl
+    with DiagnosticableTreeMixin
+    implements ScanNavigationState {
   const _$ScanNavigationStateImpl({this.ticket});
 
   @override
   final Ticket? ticket;
 
   @override
-  String toString() {
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
     return 'ScanState.scanNavigationState(ticket: $ticket)';
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties
+      ..add(DiagnosticsProperty('type', 'ScanState.scanNavigationState'))
+      ..add(DiagnosticsProperty('ticket', ticket));
   }
 
   @override
@@ -732,6 +953,7 @@ class _$ScanNavigationStateImpl implements ScanNavigationState {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() scanScanningState,
+    required TResult Function() scanOnlineLoadingState,
     required TResult Function(ApiErrorModel error) scanErrorState,
     required TResult Function(String? barcodeData) scanProcessingState,
     required TResult Function(Ticket? ticket) scanNavigationState,
@@ -744,6 +966,7 @@ class _$ScanNavigationStateImpl implements ScanNavigationState {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? scanScanningState,
+    TResult? Function()? scanOnlineLoadingState,
     TResult? Function(ApiErrorModel error)? scanErrorState,
     TResult? Function(String? barcodeData)? scanProcessingState,
     TResult? Function(Ticket? ticket)? scanNavigationState,
@@ -756,6 +979,7 @@ class _$ScanNavigationStateImpl implements ScanNavigationState {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? scanScanningState,
+    TResult Function()? scanOnlineLoadingState,
     TResult Function(ApiErrorModel error)? scanErrorState,
     TResult Function(String? barcodeData)? scanProcessingState,
     TResult Function(Ticket? ticket)? scanNavigationState,
@@ -772,6 +996,8 @@ class _$ScanNavigationStateImpl implements ScanNavigationState {
   TResult map<TResult extends Object?>({
     required TResult Function(_Initial value) initial,
     required TResult Function(ScanScanningState value) scanScanningState,
+    required TResult Function(ScanOnlineLoadingState value)
+        scanOnlineLoadingState,
     required TResult Function(ScanErrorState value) scanErrorState,
     required TResult Function(ScanProcessingState value) scanProcessingState,
     required TResult Function(ScanNavigationState value) scanNavigationState,
@@ -784,6 +1010,7 @@ class _$ScanNavigationStateImpl implements ScanNavigationState {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Initial value)? initial,
     TResult? Function(ScanScanningState value)? scanScanningState,
+    TResult? Function(ScanOnlineLoadingState value)? scanOnlineLoadingState,
     TResult? Function(ScanErrorState value)? scanErrorState,
     TResult? Function(ScanProcessingState value)? scanProcessingState,
     TResult? Function(ScanNavigationState value)? scanNavigationState,
@@ -796,6 +1023,7 @@ class _$ScanNavigationStateImpl implements ScanNavigationState {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Initial value)? initial,
     TResult Function(ScanScanningState value)? scanScanningState,
+    TResult Function(ScanOnlineLoadingState value)? scanOnlineLoadingState,
     TResult Function(ScanErrorState value)? scanErrorState,
     TResult Function(ScanProcessingState value)? scanProcessingState,
     TResult Function(ScanNavigationState value)? scanNavigationState,

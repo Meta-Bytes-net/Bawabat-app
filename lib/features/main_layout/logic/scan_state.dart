@@ -10,7 +10,7 @@ sealed class ScanState with _$ScanState {
   // const factory ScanState.scanOfflineErrorState(Ticket ticket) =
   //     ScanOfflineErrorState;
   const factory ScanState.scanScanningState() = ScanScanningState;
-
+  const factory ScanState.scanOnlineLoadingState() = ScanOnlineLoadingState;
   const factory ScanState.scanErrorState(ApiErrorModel error) = ScanErrorState;
   const factory ScanState.scanProcessingState({String? barcodeData}) =
       ScanProcessingState;

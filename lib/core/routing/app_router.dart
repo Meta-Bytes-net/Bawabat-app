@@ -21,22 +21,23 @@ class AppRouter {
 
       case Routes.mainLayoutScreen:
         return PageRouteBuilder(
-          transitionsBuilder: (context, animation, secondaryAnimation, child) {
-            const begin = Offset(0.0, 1.0);
-            const end = Offset.zero;
-            const curve = Curves.elasticIn;
+            transitionsBuilder:
+                (context, animation, secondaryAnimation, child) {
+              const begin = Offset(0.0, 1.0);
+              const end = Offset.zero;
+              const curve = Curves.elasticIn;
 
-            var tween = Tween(begin: begin, end: end).chain(
-                CurveTween(curve: const Interval(0.1, 1.0, curve: curve)));
+              var tween = Tween(begin: begin, end: end).chain(
+                  CurveTween(curve: const Interval(0.1, 1.0, curve: curve)));
 
-            return SlideTransition(
-              position: animation.drive(tween),
-              child: child,
-            );
-          },
-          pageBuilder: (context, animation, secondaryAnimation) =>
-              const MainLayoutScreen(),
-        );
+              return SlideTransition(
+                position: animation.drive(tween),
+                child: child,
+              );
+            },
+            pageBuilder: (context, animation, secondaryAnimation) =>
+                const MainLayoutScreen(),
+            settings: settings);
 
       default:
         return null;

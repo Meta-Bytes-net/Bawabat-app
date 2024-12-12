@@ -1,9 +1,9 @@
 import 'package:bwabat/core/helpers/extensions.dart';
 import 'package:bwabat/core/resources/app_assets.dart';
 import 'package:bwabat/core/resources/sizes.dart';
-import 'package:bwabat/core/routing/routes.dart';
 import 'package:bwabat/features/main_layout/data/models/ticket_model.dart';
 import 'package:bwabat/features/main_layout/ui/screen/home_screen.dart';
+import 'package:bwabat/features/main_layout/ui/screen/main_layout.dart';
 import 'package:dotted_line/dotted_line.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -21,42 +21,42 @@ class CustomTicketStatus extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 30),
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.spaceAround,
-        // mainAxisSize: MainAxisSize.min,
-        children: [
-          SvgPicture.asset(
-            Assets.svgsBawabatLogo,
-            height: 50.h,
-            width: 50.h,
-            colorFilter: const ColorFilter.mode(Colors.white, BlendMode.srcIn),
-          ),
-          BuildTicketWidget(ticketType: ticketType, ticket: ticket ?? Ticket()),
-          // gapH12,
-          GestureDetector(
-            onTap: () =>
-                PersistentNavBarNavigator.pushNewScreenWithRouteSettings(
-              context,
-            
-              settings: const RouteSettings(
-                name: Routes.homeScreen,
-              ),
-              screen: const HomeScreen(
-                ticketType: TicketType.defaultHome,
-              ),
-              withNavBar: true,
-              pageTransitionAnimation: PageTransitionAnimation.scale,
+    return PopScope(
+      canPop: false,
+      child: Padding(
+        padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 30),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
+          // mainAxisSize: MainAxisSize.min,
+          children: [
+            SvgPicture.asset(
+              Assets.svgsBawabatLogo,
+              height: 50.h,
+              width: 50.h,
+              colorFilter:
+                  const ColorFilter.mode(Colors.white, BlendMode.srcIn),
             ),
-            child: SvgPicture.asset(
-              Assets.svgsSync,
-              height: 90.h,
-              width: 90.w,
+            BuildTicketWidget(
+                ticketType: ticketType, ticket: ticket ?? Ticket()),
+            // gapH12,
+            GestureDetector(
+              onTap: () => PersistentNavBarNavigator.pushNewScreen(
+                context,
+                screen: const MainLayoutScreen(
+                  ticketType: TicketType.defaultHome,
+                ),
+                withNavBar: true,
+                pageTransitionAnimation: PageTransitionAnimation.scale,
+              ),
+              child: SvgPicture.asset(
+                Assets.svgsSync,
+                height: 90.h,
+                width: 90.w,
+              ),
             ),
-          ),
-          gapH64,
-        ],
+            gapH64,
+          ],
+        ),
       ),
     );
   }

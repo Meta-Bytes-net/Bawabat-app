@@ -24,7 +24,7 @@ class _ApiService implements ApiService {
   final ParseErrorLogger? errorLogger;
 
   @override
-  Future<LoginResponse> login(LoginRequestBody loginRequestBody) async {
+  Future<LoginResponse?> login(LoginRequestBody loginRequestBody) async {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
@@ -46,10 +46,11 @@ class _ApiService implements ApiService {
           _dio.options.baseUrl,
           baseUrl,
         )));
-    final _result = await _dio.fetch<Map<String, dynamic>>(_options);
-    late LoginResponse _value;
+    final _result = await _dio.fetch<Map<String, dynamic>?>(_options);
+    late LoginResponse? _value;
     try {
-      _value = LoginResponse.fromJson(_result.data!);
+      _value =
+          _result.data == null ? null : LoginResponse.fromJson(_result.data!);
     } on Object catch (e, s) {
       errorLogger?.logError(e, s, _options);
       rethrow;
@@ -58,7 +59,7 @@ class _ApiService implements ApiService {
   }
 
   @override
-  Future<Ticket> scanQrCode(ScanQrRequestBody scanQrRequestBody) async {
+  Future<Ticket?> scanQrCode(ScanQrRequestBody scanQrRequestBody) async {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
@@ -80,10 +81,10 @@ class _ApiService implements ApiService {
           _dio.options.baseUrl,
           baseUrl,
         )));
-    final _result = await _dio.fetch<Map<String, dynamic>>(_options);
-    late Ticket _value;
+    final _result = await _dio.fetch<Map<String, dynamic>?>(_options);
+    late Ticket? _value;
     try {
-      _value = Ticket.fromJson(_result.data!);
+      _value = _result.data == null ? null : Ticket.fromJson(_result.data!);
     } on Object catch (e, s) {
       errorLogger?.logError(e, s, _options);
       rethrow;

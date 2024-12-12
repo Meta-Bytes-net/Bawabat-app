@@ -14,12 +14,12 @@ abstract class ApiService {
   factory ApiService(Dio dio, {String baseUrl}) = _ApiService;
 
   @POST(ApiConstants.login)
-  Future<LoginResponse> login(
+  Future<LoginResponse?> login(
     @Body() LoginRequestBody loginRequestBody,
   );
   @POST(ApiConstants.scanQrCode)
   // Todo: change return type to ScanQrResponse
-  Future<Ticket> scanQrCode(
+  Future<Ticket?> scanQrCode(
     @Body() ScanQrRequestBody scanQrRequestBody,
   );
 }

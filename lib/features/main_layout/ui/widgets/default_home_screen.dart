@@ -2,19 +2,19 @@ import 'package:animated_toggle_switch/animated_toggle_switch.dart';
 import 'package:bwabat/core/di/dependency_injection.dart';
 import 'package:bwabat/core/helpers/shared_pref_helper.dart';
 import 'package:bwabat/core/resources/app_assets.dart';
-import 'package:bwabat/features/main_layout/logic/scan_cubit.dart';
+import 'package:bwabat/features/login/data/models/converted_keys.dart';
 import 'package:bwabat/features/main_layout/ui/screen/scan_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:persistent_bottom_nav_bar/persistent_bottom_nav_bar.dart';
 
+import '../../../../core/helpers/constants.dart';
 import '../../../../core/resources/sizes.dart';
-import '../../../../core/routing/routes.dart';
 import '../../../../core/theming/text_styles.dart';
 import '../../../../core/widgets/custom_button.dart';
+import '../../logic/scan_cubit.dart';
 
 class DefaultHome extends StatefulWidget {
   const DefaultHome({super.key});
@@ -24,7 +24,6 @@ class DefaultHome extends StatefulWidget {
 }
 
 class _DefaultHomeState extends State<DefaultHome> {
-  bool _isToggled = true;
   // bool positive = true;
   @override
   Widget build(BuildContext context) {
@@ -38,22 +37,38 @@ class _DefaultHomeState extends State<DefaultHome> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            Container(
-              alignment: Alignment.topCenter,
-              padding: const EdgeInsets.symmetric(horizontal: 40, vertical: 0),
-              child: SvgPicture.asset(
-                height: 45.h,
-                width: 45.h,
-                Assets.svgsBawabatLogo,
-                colorFilter:
-                    const ColorFilter.mode(Colors.white, BlendMode.srcIn),
-              )
-                  .animate()
-                  .slide(duration: const Duration(seconds: 1))
-                  .fadeIn(
-                    duration: const Duration(seconds: 1),
+            Row(
+              children: [
+                const Spacer(flex: 11),
+                Container(
+                  alignment: Alignment.topCenter,
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 40, vertical: 0),
+                  child: SvgPicture.asset(
+                    height: 45.h,
+                    width: 45.h,
+                    Assets.svgsBawabatLogo,
+                    colorFilter:
+                        const ColorFilter.mode(Colors.white, BlendMode.srcIn),
                   )
-                  .scale(duration: const Duration(seconds: 1)),
+                      .animate()
+                      .slide(duration: const Duration(seconds: 1))
+                      .fadeIn(
+                        duration: const Duration(seconds: 1),
+                      )
+                      .scale(duration: const Duration(seconds: 1)),
+                ),
+                const Spacer(
+                  flex: 1,
+                ),
+                IconButton(
+                    onPressed: () {},
+                    icon: const Icon(
+                      Icons.exit_to_app_rounded,
+                      color: Colors.red,
+                      size: 30,
+                    )),
+              ],
             ),
             gapH12,
             Text(
@@ -61,75 +76,7 @@ class _DefaultHomeState extends State<DefaultHome> {
               style: TextStyles.font20WhiteSemiBold,
             ),
             gapH12,
-            Container(
-              padding: EdgeInsets.symmetric(horizontal: 4.0.w, vertical: 4.0.h),
-              margin: EdgeInsets.symmetric(horizontal: 8.0.w, vertical: 8.0.h),
-              decoration: BoxDecoration(
-                color: Colors.transparent,
-                shape: BoxShape.rectangle,
-                borderRadius: BorderRadius.circular(30),
-                border: Border.all(color: const Color(0xFF1C61C6), width: 2),
-              ),
-              child: AnimatedToggleSwitch<bool>.size(
-                current: _isToggled,
-                values: const [true, false],
-                borderWidth: 0,
-                height: 45.h,
-                style: ToggleStyle(
-                  indicatorColor: const Color(0xFF1C61C6),
-                  backgroundColor: Colors.transparent,
-                  indicatorBorder: Border.all(color: Colors.transparent),
-                ),
-                onChanged: (value) {
-                  setState(() {
-                    _isToggled = value;
-                  });
-                },
-                indicatorSize: Size.fromWidth(
-                  130.0.w,
-                ),
-                iconBuilder: (value) {
-                  if (value == true) {
-                    // When online
-                    return Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        const Text(
-                          'Online',
-                          style: TextStyle(color: Colors.white),
-                        ),
-                        const SizedBox(width: 8),
-                        SvgPicture.asset(Assets.svgsOnlineIcon),
-
-                        // Icon(
-                        //   Icons.wifi_rounded,
-                        //   color: Colors.white,
-                        //   size: 16.sp,
-                        // ),
-                      ],
-                    );
-                  } else {
-                    // When offline
-                    return Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Text(
-                          'Offline',
-                          style: TextStyles.font14WhiteSemiBold,
-                        ),
-                        const SizedBox(width: 8),
-                        SvgPicture.asset(Assets.svgsOfflineIcon),
-                        // Icon(
-                        //   Icons.wifi_off_rounded,
-                        //   color: Colors.white,
-                        //   size: 16.sp,
-                        // ),
-                      ],
-                    );
-                  }
-                },
-              ),
-            ),
+            const BuildSwitcher(),
             // AnimatedToggleSwitch<String>.dual(
             //   first: "Online",
             //   second: "Offline",
@@ -220,20 +167,28 @@ class _DefaultHomeState extends State<DefaultHome> {
                       padding: const EdgeInsets.symmetric(vertical: 13),
                       text: 'Scan Now',
                       onPressed: () {
-                        PersistentNavBarNavigator
-                            .pushNewScreenWithRouteSettings(
-                          context,
-                          settings:
-                              const RouteSettings(name: Routes.scanScreen),
-                          screen: BlocProvider(
-                            create: (BuildContext context) =>
-                                getIt<ScanCubit>()..startScanning(),
-                            child: const ScanScreen(),
+                        Navigator.of(context).push(
+                          MaterialPageRoute(
+                            builder: (_) => BlocProvider(
+                              create: (context) =>
+                                  getIt<ScanCubit>()..startScanning(),
+                              child: const ScanScreen(),
+                            ),
                           ),
-                          withNavBar: true,
-                          pageTransitionAnimation:
-                              PageTransitionAnimation.cupertino,
                         );
+                        //     Routes.scanScreen,
+                        // context,
+                        // settings:
+                        //     const RouteSettings(name: Routes.scanScreen),
+                        // screen: BlocProvider(
+                        //   create: (BuildContext context) =>
+                        //       getIt<ScanCubit>()..startScanning(),
+                        //   child: const ScanScreen(),
+                        // ),
+                        // withNavBar: true,
+                        // pageTransitionAnimation:
+                        //     PageTransitionAnimation.cupertino,
+                        // )
                       },
                       // child: const Text('Login'),
                     ),
@@ -243,6 +198,116 @@ class _DefaultHomeState extends State<DefaultHome> {
             ),
           ],
         ),
+      ),
+    );
+  }
+}
+
+class BuildSwitcher extends StatefulWidget {
+  const BuildSwitcher({super.key});
+
+  @override
+  State<BuildSwitcher> createState() => _BuildSwitcherState();
+}
+
+class _BuildSwitcherState extends State<BuildSwitcher> {
+  bool _isToggled = false;
+  ConvertedKeys? convertedKeys;
+  getBoolIsOnlineFromCache() async {
+    _isToggled = await SharedPrefHelper.getBool(SharedPrefKeys.isOnline);
+    debugPrint("getBoolIsOnlineFromCache   $_isToggled");
+  }
+
+  getKeysFromCache() async {
+    convertedKeys = await SharedPrefHelper.retrieveConvertedKeysSecurely();
+    debugPrint("getKeysFromCache   ${convertedKeys?.encryprionkey}");
+    setState(() {});
+  }
+
+  @override
+  void didChangeDependencies() {
+    getBoolIsOnlineFromCache();
+    getKeysFromCache();
+    super.didChangeDependencies();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      padding: EdgeInsets.symmetric(horizontal: 4.0.w, vertical: 4.0.h),
+      margin: EdgeInsets.symmetric(horizontal: 8.0.w, vertical: 8.0.h),
+      decoration: BoxDecoration(
+        color: Colors.transparent,
+        shape: BoxShape.rectangle,
+        borderRadius: BorderRadius.circular(30),
+        border: Border.all(color: const Color(0xFF1C61C6), width: 2),
+      ),
+      child: AnimatedToggleSwitch<bool>.size(
+        current: _isToggled,
+        values: const [false, true],
+        borderWidth: 0,
+        height: 45.h,
+        style: ToggleStyle(
+          indicatorColor: const Color(0xFF1C61C6),
+          backgroundColor: Colors.transparent,
+          indicatorBorder: Border.all(color: Colors.transparent),
+        ),
+        onChanged: convertedKeys?.encryprionkey != ''
+            ? (value) async {
+                // bool isOnline =
+                //     await SharedPrefHelper.getBool(SharedPrefKeys.isOnline);
+
+                if (convertedKeys?.encryprionkey != '') {
+                  setState(() {
+                    _isToggled = value;
+                    SharedPrefHelper.setData(SharedPrefKeys.isOnline, value);
+                  });
+                }
+              }
+            : null,
+        indicatorSize: Size.fromWidth(
+          130.0.w,
+        ),
+        iconBuilder: (value) {
+          if (value == true) {
+            // When online
+            return Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                const Text(
+                  'Online',
+                  style: TextStyle(color: Colors.white),
+                ),
+                const SizedBox(width: 8),
+                SvgPicture.asset(Assets.svgsOnlineIcon),
+
+                // Icon(
+                //   Icons.wifi_rounded,
+                //   color: Colors.white,
+                //   size: 16.sp,
+                // ),
+              ],
+            );
+          } else {
+            // When offline
+            return Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Text(
+                  'Offline',
+                  style: TextStyles.font14WhiteSemiBold,
+                ),
+                const SizedBox(width: 8),
+                SvgPicture.asset(Assets.svgsOfflineIcon),
+                // Icon(
+                //   Icons.wifi_off_rounded,
+                //   color: Colors.white,
+                //   size: 16.sp,
+                // ),
+              ],
+            );
+          }
+        },
       ),
     );
   }

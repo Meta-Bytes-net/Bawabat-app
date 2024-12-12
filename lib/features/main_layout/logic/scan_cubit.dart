@@ -2,6 +2,7 @@ import 'dart:async';
 import 'dart:convert';
 
 import 'package:bloc/bloc.dart';
+import 'package:bwabat/core/helpers/constants.dart';
 import 'package:bwabat/core/helpers/encryption_manager.dart';
 import 'package:bwabat/core/helpers/shared_pref_helper.dart';
 import 'package:bwabat/core/networking/api_error_model.dart';
@@ -9,6 +10,7 @@ import 'package:bwabat/features/login/data/models/converted_keys.dart';
 import 'package:bwabat/features/main_layout/data/models/scan_qr_request_body.dart';
 import 'package:bwabat/features/main_layout/data/models/ticket_model.dart';
 import 'package:bwabat/features/main_layout/data/repos/home_repo.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
@@ -19,7 +21,7 @@ part 'scan_state.dart';
 
 class ScanCubit extends Cubit<ScanState> {
   final HomeRepo _homeRepo;
-  late final bool isOnline;
+  // late final bool isOnline;
   // late MobileScannerController controller;
 
   // StreamSubscription<Object?>? _subscription;
@@ -31,18 +33,17 @@ class ScanCubit extends Cubit<ScanState> {
   );
 
   StreamSubscription? barcodeSubscription;
-  bool _isNavigating = false;
+  bool isNavigating = false;
 
   /// Start scanning for barcodes
   Future<void> startScanning() async {
-    if (_isNavigating) return; // Prevent scanning during navigation
-    var convertedKeys = await SharedPrefHelper.retrieveConvertedKeysSecurely();
-    isOnline = convertedKeys?.encryprionkey == null;
+    if (isNavigating) return; // Prevent scanning during navigation
+    await controller.start();
+
     emit(const ScanScanningState());
     barcodeSubscription = controller.barcodes.listen((barcodeCapture) async {
-      await _handleBarcode(barcodeCapture);
+      await handleBarcode(barcodeCapture);
     });
-    await controller.start();
   }
 
   /// Stop scanning for barcodes
@@ -57,24 +58,33 @@ class ScanCubit extends Cubit<ScanState> {
     if (!controller.value.hasCameraPermission) return;
     switch (state) {
       case AppLifecycleState.detached:
+        debugPrint("detached");
       case AppLifecycleState.hidden:
+        debugPrint("hidden");
       case AppLifecycleState.paused:
+        debugPrint("paused");
         await stopScanning();
         break;
 
       case AppLifecycleState.resumed:
-        if (!_isNavigating) await startScanning();
+        debugPrint("resumed");
+        await startScanning();
         break;
 
       case AppLifecycleState.inactive:
+        debugPrint("inactive");
         await stopScanning();
         break;
     }
   }
 
   /// Process the barcode
-  Future<void> _handleBarcode(BarcodeCapture barcodeCapture) async {
-    if (_isNavigating) return; // Prevent duplicate navigation
+  Ticket? ticket;
+  Future<void> handleBarcode(BarcodeCapture barcodeCapture) async {
+    if (isNavigating) {
+      debugPrint("Navigation already in progress, skipping barcode handling.");
+      return;
+    }
 
     try {
       final barcodes = barcodeCapture.barcodes;
@@ -83,53 +93,75 @@ class ScanCubit extends Cubit<ScanState> {
       final String rawValue = barcodes.first.rawValue!;
       emit(ScanProcessingState(barcodeData: rawValue));
 
-      final Ticket? ticket = isOnline == true
-          ? await _processBarcodeOnline(rawValue)
-          : await _processBarcodeOffline(rawValue);
-      if (ticket == null) {
-        emit(ScanErrorState(
-            ApiErrorModel(error: ErrorData(message: "Invalid QR Code"))));
-        return;
+      isNavigating = true; // Prevent further processing
+      var isOnline = await SharedPrefHelper.getBool(SharedPrefKeys.isOnline);
+      debugPrint("isOnline: $isOnline");
+
+      if (isOnline) {
+        await _processBarcodeOnline(rawValue);
+      } else {
+        await _processBarcodeOffline(rawValue);
       }
 
-      // Prevent further navigation until the process completes
-      _isNavigating = true;
-      dispose();
       emit(ScanNavigationState(ticket: ticket));
+      dispose();
     } catch (error) {
       emit(ScanErrorState(ApiErrorModel(
-          error: ErrorData(message: "Error processing barcode: $error"))));
+        error: ErrorData(message: "Error processing barcode: $error"),
+      )));
+    } finally {
+      // Do not reset `_isNavigating` here to ensure it blocks further scans
+      // until navigation is explicitly completed in the UI layer.
     }
   }
 
-  Future<Ticket?> _processBarcodeOnline(String qrCode) async {
+  Future<void> _processBarcodeOnline(String qrCode) async {
+    emit(const ScanOnlineLoadingState());
     final response =
         await _homeRepo.scanQrCode(ScanQrRequestBody(qrCode: qrCode));
 
-    response.when(success: (ticket) async {
-      return ticket;
+    response.when(success: (onlineTicket) {
+      if (kDebugMode) {
+        print(
+            "inSuccess Ticket ID: ${ticket?.msg} Ticket Number: ${ticket?.ticketNumber} Ticket Type: ${ticket?.ticketType} Ticket Status: ${ticket?.userName}    ");
+      }
+
+      ticket = onlineTicket;
+
+      // print every attribute in th ticket
     }, failure: (error) {
       emit(ScanErrorState(error));
     });
-    return null;
+    return;
   }
 
-  Future<Ticket?> _processBarcodeOffline(String rawValue) async {
+  Future<void> _processBarcodeOffline(String rawValue) async {
     final ConvertedKeys? convertedKeys =
         await SharedPrefHelper.retrieveConvertedKeysSecurely();
 
     final String? decryptedData = EncryptionManager.decryptData(
       rawValue,
-      convertedKeys ?? ConvertedKeys(encryprionkey: null, iv: null),
+      ConvertedKeys(
+          encryprionkey: convertedKeys?.encryprionkey, iv: convertedKeys?.iv),
     );
+    if (kDebugMode) {
+      print("decryptedData: ${convertedKeys?.encryprionkey ?? ""}");
+      print("decryptedData: ${convertedKeys?.iv ?? ""}");
+      print("decryptedData: $decryptedData");
+    }
 
-    if (decryptedData == null) return null;
-    return Ticket.fromJson(jsonDecode(decryptedData));
+    if (decryptedData == null) return;
+    ticket = Ticket.fromJson(jsonDecode(decryptedData));
+
+    debugPrint(
+        " inOffline Ticket ID: ${ticket?.msg} Ticket Number: ${ticket?.ticketNumber} Ticket Type: ${ticket?.ticketType} Ticket Status: ${ticket?.userName}");
+    // emit(ScanNavigationState(ticket: ticket));
+    return;
   }
 
   /// Mark navigation as completed
   void completeNavigation() {
-    _isNavigating = false;
+    isNavigating = false;
   }
 
   Future<void> dispose() async {

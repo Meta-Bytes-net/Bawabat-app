@@ -1,3 +1,5 @@
+import 'package:bwabat/core/helpers/constants.dart';
+import 'package:bwabat/core/helpers/shared_pref_helper.dart';
 import 'package:dio/dio.dart';
 import 'package:pretty_dio_logger/pretty_dio_logger.dart';
 
@@ -50,8 +52,8 @@ class DioFactory {
     dio?.options.headers = {
       'Accept': 'application/json',
       'Authorization':
-          // 'Bearer ${await SharedPrefHelper.getSecuredString(SharedPrefKeys.userToken)}',
-          'Bearer ',
+          'Bearer ${await SharedPrefHelper.getSecuredString(SharedPrefKeys.userToken)}',
+          // 'Bearer ',
     };
   }
 

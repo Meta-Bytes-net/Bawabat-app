@@ -10,7 +10,7 @@ class HomeRepo {
 
   HomeRepo(this._apiService);
 
-  Future<ApiResult<Ticket>> scanQrCode(
+  Future<ApiResult<Ticket?>> scanQrCode(
       ScanQrRequestBody scanQrRequestBody) async {
     try {
       final response = await _apiService.scanQrCode(scanQrRequestBody);

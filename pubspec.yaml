@@ -64,6 +64,7 @@ dependencies:
   hive_flutter: ^1.1.0
   toggle_switch: ^2.3.0
   animated_toggle_switch: ^0.8.3
+  flash: ^3.1.1
 
   
 

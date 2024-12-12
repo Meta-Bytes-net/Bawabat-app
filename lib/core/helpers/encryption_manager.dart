@@ -1,5 +1,8 @@
+import 'dart:convert';
+
 import 'package:bwabat/features/login/data/models/converted_keys.dart';
 import 'package:encrypt/encrypt.dart' as encrypt;
+import 'package:encrypt/encrypt.dart';
 import 'package:flutter/foundation.dart';
 
 class EncryptionManager {
@@ -52,9 +55,15 @@ class EncryptionManager {
           encrypt.Key.fromUtf8(keys.encryprionkey!); // 32 bytes for AES-256
       final encryptioniv =
           encrypt.IV.fromUtf8(keys.iv!); // 16 bytes for AES-CBC
-      final encrypter = encrypt.Encrypter(
-          encrypt.AES(encryptionKey, mode: encrypt.AESMode.cbc));
-      final decrypted = encrypter.decrypt64(encryptedData, iv: encryptioniv);
+      final encryptedBytes = Encrypted(base64Decode(encryptedData));
+
+      final encrypter = encrypt.Encrypter(encrypt.AES(
+        encryptionKey,
+        mode: encrypt.AESMode.cbc,
+      ));
+      final decrypted = encrypter.decrypt(encryptedBytes, iv: encryptioniv);
+
+      // final decrypted = encrypter.decrypt64(encryptedData, iv: encryptioniv);
       return decrypted; // Directly set decrypted value
     } catch (e) {
       if (kDebugMode) {
