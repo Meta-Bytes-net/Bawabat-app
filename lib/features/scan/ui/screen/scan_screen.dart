@@ -12,40 +12,42 @@ class ScanScreen extends StatefulWidget {
 }
 
 class _ScanScreenState extends State<ScanScreen> with WidgetsBindingObserver {
-  late ScanCubit _scanCubit;
+  // final ScanCubit _scanCubit = getIt<ScanCubit>();
 
   @override
   void initState() {
     super.initState();
     WidgetsBinding.instance.addObserver(this);
-    _scanCubit = context.read<ScanCubit>();
   }
 
   @override
   void dispose() {
     WidgetsBinding.instance.removeObserver(this);
-    _scanCubit.dispose();
     super.dispose();
   }
 
   @override
   void didChangeDependencies() {
-    _scanCubit.startScanning();
-
     super.didChangeDependencies();
+
+    // WidgetsBinding.instance.addPostFrameCallback((_) {
+    //   scanCubit.startScanning(); // Replace with your logic
+    // });
   }
 
   @override
   void didChangeAppLifecycleState(AppLifecycleState state) {
-    _scanCubit.handleAppLifecycleState(state);
+    context.read<ScanCubit>().handleAppLifecycleState(state);
   }
 
   @override
   Widget build(BuildContext context) {
-    return ScanBlocListener(
-      child: MobileScanner(
-        controller: _scanCubit.controller,
-        onDetect: (BarcodeCapture capture) {},
+    return Scaffold(
+      body: ScanBlocListener(
+        child: MobileScanner(
+          controller: context.read<ScanCubit>().controller,
+          onDetect: (BarcodeCapture capture) {},
+        ),
       ),
     );
   }

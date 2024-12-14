@@ -1,9 +1,13 @@
+import 'package:bwabat/core/di/dependency_injection.dart';
+import 'package:bwabat/features/main_layout/logic/cubit/home_cubit.dart';
 import 'package:bwabat/features/main_layout/ui/widgets/custom_ticket_status_body.dart';
 import 'package:bwabat/features/main_layout/ui/widgets/default_home_body.dart';
+import 'package:bwabat/features/main_layout/ui/widgets/home_bloc_listener.dart';
 import 'package:bwabat/features/scan/data/models/ticket_model.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
-class HomeScreen extends StatefulWidget {
+class HomeScreen extends StatelessWidget {
   final TicketType? ticketType;
 
   final Ticket? ticket;
@@ -11,20 +15,21 @@ class HomeScreen extends StatefulWidget {
       {super.key, this.ticketType = TicketType.defaultHome, this.ticket});
 
   @override
-  State<HomeScreen> createState() => _HomeScreenState();
-}
-
-class _HomeScreenState extends State<HomeScreen> {
-
-
-  @override
   Widget build(BuildContext context) {
-    return PopScope(
-      canPop: false,
-      child: Container(
-          color: const Color(0xFF081B33),
-          child: _buildHomeWidget(widget.ticketType ?? TicketType.defaultHome)),
-    );
+    return BlocProvider(
+        create: (context) => getIt<HomeCubit>(),
+        child: HomeBlocListener(
+          child: Scaffold(
+            body: PopScope(
+              canPop: false,
+              child: Container(
+                  height: double.infinity,
+                  color: const Color(0xFF081B33),
+                  child:
+                      _buildHomeWidget(ticketType ?? TicketType.defaultHome)),
+            ),
+          ),
+        ));
   }
 
   Widget _buildHomeWidget(TicketType ticketType) {
@@ -32,7 +37,7 @@ class _HomeScreenState extends State<HomeScreen> {
       case TicketType.success:
         return CustomTicketStatus(
           ticketType: ticketType,
-          ticket: widget.ticket,
+          ticket: ticket,
         ); // Replace with the desired widget
       case TicketType.error:
         return CustomTicketStatus(

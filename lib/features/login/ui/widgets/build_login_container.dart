@@ -26,12 +26,24 @@ class _BuildLoginContainerState extends State<BuildLoginContainer> {
   bool hasSpecialCharacters = false;
   bool hasNumber = false;
   bool hasMinLength = false;
+  late FocusNode _emailFocusNode;
+  late FocusNode _passwordFocusNode;
 
   late TextEditingController passwordController;
   @override
   void initState() {
     super.initState();
+    _passwordFocusNode = FocusNode();
+    _emailFocusNode = FocusNode();
     passwordController = context.read<LoginCubit>().passwordController;
+  }
+
+  @override
+  void dispose() {
+    _emailFocusNode.dispose();
+    _passwordFocusNode.dispose();
+    passwordController.dispose();
+    super.dispose();
   }
 
   @override
@@ -43,6 +55,7 @@ class _BuildLoginContainerState extends State<BuildLoginContainer> {
           AppTextFormField(
             // key: _emailFieldKey,
             label: 'Email',
+            focusNode: _emailFocusNode,
             controller: context.read<LoginCubit>().emailController,
             validator: FormBuilderValidators.compose([
               FormBuilderValidators.required(),
@@ -56,6 +69,7 @@ class _BuildLoginContainerState extends State<BuildLoginContainer> {
           const SizedBox(height: 10),
           AppTextFormField(
             label: 'Password',
+            focusNode: _passwordFocusNode,
             controller: context.read<LoginCubit>().passwordController,
             isObscureText: true,
             validator: FormBuilderValidators.compose([
@@ -102,6 +116,9 @@ class _BuildLoginContainerState extends State<BuildLoginContainer> {
   void validateThenDoLogin(BuildContext context) {
     if (context.read<LoginCubit>().formKey.currentState?.saveAndValidate() ??
         false) {
+      _emailFocusNode.unfocus();
+      _passwordFocusNode.unfocus();
+
       context.read<LoginCubit>().emitLoginStates();
     }
   }

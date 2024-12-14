@@ -3,6 +3,7 @@ import 'package:bwabat/core/di/dependency_injection.dart';
 import 'package:bwabat/core/helpers/shared_pref_helper.dart';
 import 'package:bwabat/core/resources/app_assets.dart';
 import 'package:bwabat/features/login/data/models/converted_keys.dart';
+import 'package:bwabat/features/main_layout/logic/cubit/home_cubit.dart';
 import 'package:bwabat/features/scan/logic/scan_cubit.dart';
 import 'package:bwabat/features/scan/ui/screen/scan_screen.dart';
 import 'package:flutter/material.dart';
@@ -87,15 +88,23 @@ class _DefaultHomeState extends State<DefaultHome> {
                     backgroundColor: const Color.fromARGB(255, 25, 75, 136),
                     padding: const EdgeInsets.symmetric(vertical: 13),
                     text: 'Scan Now',
-                    onPressed: () {
-                      scanOnPressed(context);
+                    onPressed: () async {
+                      await Navigator.of(context).push(
+                        MaterialPageRoute(
+                          builder: (context) => BlocProvider(
+                            create: (context) =>
+                                getIt<ScanCubit>()..startScanning(),
+                            child: const ScanScreen(),
+                          ),
+                        ),
+                      );
                     },
                   ),
                 ],
               ),
             ),
             IconButton(
-                onPressed: () {},
+                onPressed: () => getIt<HomeCubit>().signOut(),
                 icon: const Icon(
                   Icons.exit_to_app_rounded,
                   color: Colors.red,
@@ -110,10 +119,7 @@ class _DefaultHomeState extends State<DefaultHome> {
   void scanOnPressed(BuildContext context) {
     Navigator.of(context).push(
       MaterialPageRoute(
-        builder: (_) => BlocProvider(
-          create: (context) => getIt<ScanCubit>()..startScanning(),
-          child: const ScanScreen(),
-        ),
+        builder: (_) => const ScanScreen(),
       ),
     );
   }

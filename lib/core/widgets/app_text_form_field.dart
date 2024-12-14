@@ -25,10 +25,13 @@ class AppTextFormField extends StatelessWidget {
   final bool? isEnabled;
   final Color? hintTextColor;
   final ValueChanged<String?>? onChanged;
+  final FocusNode? focusNode;
+
   const AppTextFormField(
       {super.key,
       this.borderRadius,
       this.restorationId,
+      this.focusNode,
       this.isEnabled,
       this.contentPadding,
       this.onChanged,
@@ -57,7 +60,8 @@ class AppTextFormField extends StatelessWidget {
           cursorRadius: Radius.circular(20.r),
           obscureText: isObscureText ?? false,
           validator: validator,
-
+          autofocus: false,
+          focusNode: focusNode,
           controller: controller,
           enabled: isEnabled ?? true,
           maxLines: maxLine,
@@ -68,6 +72,7 @@ class AppTextFormField extends StatelessWidget {
             //     fontSize: 16.sp,
             //     color: ColorsManager.primaryColor,
             //     backgroundColor: const Color(0xFF081B33)),
+
             alignLabelWithHint: true,
             fillColor: backgroundColor ?? const Color.fromARGB(255, 36, 63, 99),
             floatingLabelStyle: const TextStyle(color: Colors.white),

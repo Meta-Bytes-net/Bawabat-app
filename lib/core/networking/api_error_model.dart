@@ -1,4 +1,5 @@
 import 'package:json_annotation/json_annotation.dart';
+
 part 'api_error_model.g.dart';
 
 @JsonSerializable()
@@ -7,10 +8,13 @@ class ApiErrorModel {
   int? status;
   @JsonKey(name: "error")
   ErrorData? error;
+  @JsonKey(name: "message")
+  String? message;
 
   ApiErrorModel({
     this.status,
     this.error,
+    this.message,
   });
 
   factory ApiErrorModel.fromJson(Map<String, dynamic> json) =>
@@ -19,9 +23,7 @@ class ApiErrorModel {
   Map<String, dynamic> toJson() => _$ApiErrorModelToJson(this);
 
   String getAllErrorMessages() {
-    return error?.details?.map((error) => '• $error').join('\n') ??
-        error?.message ??
-        '';
+    return message ?? '';
   }
 }
 

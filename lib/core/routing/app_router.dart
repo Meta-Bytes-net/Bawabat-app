@@ -3,6 +3,8 @@ import 'package:bwabat/core/routing/routes.dart';
 import 'package:bwabat/features/login/logic/login_cubit.dart';
 import 'package:bwabat/features/login/ui/screen/login_screen.dart';
 import 'package:bwabat/features/main_layout/ui/screen/main_layout.dart';
+import 'package:bwabat/features/scan/logic/scan_cubit.dart';
+import 'package:bwabat/features/scan/ui/screen/scan_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -17,6 +19,15 @@ class AppRouter {
             create: (context) => getIt<LoginCubit>(),
             child: const LoginScreen(),
           ),
+          settings: settings,
+        );
+      case Routes.scanScreen:
+        return MaterialPageRoute(
+          builder: (_) => BlocProvider(
+            create: (context) => getIt<ScanCubit>()..startScanning(),
+            child: const ScanScreen(),
+          ),
+          settings: settings,
         );
 
       case Routes.mainLayoutScreen:
