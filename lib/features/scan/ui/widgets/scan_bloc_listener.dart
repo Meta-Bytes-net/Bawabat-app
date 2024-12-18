@@ -46,7 +46,7 @@ class ScanBlocListener extends StatelessWidget {
                 ).then((value) {
                   if (!context.mounted) return;
                   scanCubit.startScanning();
-                });
+                }); 
 
                 scanCubit.completeNavigation();
               }

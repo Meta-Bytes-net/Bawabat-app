@@ -22,6 +22,12 @@ mixin _$HomeState {
     required TResult Function() signoutLoading,
     required TResult Function() signoutSuccess,
     required TResult Function() signoutError,
+    required TResult Function() syncLoading,
+    required TResult Function(List<Ticket> tickets) syncSuccess,
+    required TResult Function(String message) syncError,
+    required TResult Function() cachingTicket,
+    required TResult Function() ticketCached,
+    required TResult Function(String message) cachingError,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -30,6 +36,12 @@ mixin _$HomeState {
     TResult? Function()? signoutLoading,
     TResult? Function()? signoutSuccess,
     TResult? Function()? signoutError,
+    TResult? Function()? syncLoading,
+    TResult? Function(List<Ticket> tickets)? syncSuccess,
+    TResult? Function(String message)? syncError,
+    TResult? Function()? cachingTicket,
+    TResult? Function()? ticketCached,
+    TResult? Function(String message)? cachingError,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -38,6 +50,12 @@ mixin _$HomeState {
     TResult Function()? signoutLoading,
     TResult Function()? signoutSuccess,
     TResult Function()? signoutError,
+    TResult Function()? syncLoading,
+    TResult Function(List<Ticket> tickets)? syncSuccess,
+    TResult Function(String message)? syncError,
+    TResult Function()? cachingTicket,
+    TResult Function()? ticketCached,
+    TResult Function(String message)? cachingError,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -47,6 +65,12 @@ mixin _$HomeState {
     required TResult Function(SignoutLoading value) signoutLoading,
     required TResult Function(SignoutSuccess value) signoutSuccess,
     required TResult Function(SignoutError value) signoutError,
+    required TResult Function(SyncLoading value) syncLoading,
+    required TResult Function(SyncSuccess value) syncSuccess,
+    required TResult Function(SyncError value) syncError,
+    required TResult Function(CachingTicket value) cachingTicket,
+    required TResult Function(TicketCached value) ticketCached,
+    required TResult Function(CachingError value) cachingError,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -55,6 +79,12 @@ mixin _$HomeState {
     TResult? Function(SignoutLoading value)? signoutLoading,
     TResult? Function(SignoutSuccess value)? signoutSuccess,
     TResult? Function(SignoutError value)? signoutError,
+    TResult? Function(SyncLoading value)? syncLoading,
+    TResult? Function(SyncSuccess value)? syncSuccess,
+    TResult? Function(SyncError value)? syncError,
+    TResult? Function(CachingTicket value)? cachingTicket,
+    TResult? Function(TicketCached value)? ticketCached,
+    TResult? Function(CachingError value)? cachingError,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -63,6 +93,12 @@ mixin _$HomeState {
     TResult Function(SignoutLoading value)? signoutLoading,
     TResult Function(SignoutSuccess value)? signoutSuccess,
     TResult Function(SignoutError value)? signoutError,
+    TResult Function(SyncLoading value)? syncLoading,
+    TResult Function(SyncSuccess value)? syncSuccess,
+    TResult Function(SyncError value)? syncError,
+    TResult Function(CachingTicket value)? cachingTicket,
+    TResult Function(TicketCached value)? ticketCached,
+    TResult Function(CachingError value)? cachingError,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -109,12 +145,18 @@ class __$$InitialImplCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$InitialImpl implements _Initial {
+class _$InitialImpl with DiagnosticableTreeMixin implements _Initial {
   const _$InitialImpl();
 
   @override
-  String toString() {
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
     return 'HomeState.initial()';
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(DiagnosticsProperty('type', 'HomeState.initial'));
   }
 
   @override
@@ -133,6 +175,12 @@ class _$InitialImpl implements _Initial {
     required TResult Function() signoutLoading,
     required TResult Function() signoutSuccess,
     required TResult Function() signoutError,
+    required TResult Function() syncLoading,
+    required TResult Function(List<Ticket> tickets) syncSuccess,
+    required TResult Function(String message) syncError,
+    required TResult Function() cachingTicket,
+    required TResult Function() ticketCached,
+    required TResult Function(String message) cachingError,
   }) {
     return initial();
   }
@@ -144,6 +192,12 @@ class _$InitialImpl implements _Initial {
     TResult? Function()? signoutLoading,
     TResult? Function()? signoutSuccess,
     TResult? Function()? signoutError,
+    TResult? Function()? syncLoading,
+    TResult? Function(List<Ticket> tickets)? syncSuccess,
+    TResult? Function(String message)? syncError,
+    TResult? Function()? cachingTicket,
+    TResult? Function()? ticketCached,
+    TResult? Function(String message)? cachingError,
   }) {
     return initial?.call();
   }
@@ -155,6 +209,12 @@ class _$InitialImpl implements _Initial {
     TResult Function()? signoutLoading,
     TResult Function()? signoutSuccess,
     TResult Function()? signoutError,
+    TResult Function()? syncLoading,
+    TResult Function(List<Ticket> tickets)? syncSuccess,
+    TResult Function(String message)? syncError,
+    TResult Function()? cachingTicket,
+    TResult Function()? ticketCached,
+    TResult Function(String message)? cachingError,
     required TResult orElse(),
   }) {
     if (initial != null) {
@@ -170,6 +230,12 @@ class _$InitialImpl implements _Initial {
     required TResult Function(SignoutLoading value) signoutLoading,
     required TResult Function(SignoutSuccess value) signoutSuccess,
     required TResult Function(SignoutError value) signoutError,
+    required TResult Function(SyncLoading value) syncLoading,
+    required TResult Function(SyncSuccess value) syncSuccess,
+    required TResult Function(SyncError value) syncError,
+    required TResult Function(CachingTicket value) cachingTicket,
+    required TResult Function(TicketCached value) ticketCached,
+    required TResult Function(CachingError value) cachingError,
   }) {
     return initial(this);
   }
@@ -181,6 +247,12 @@ class _$InitialImpl implements _Initial {
     TResult? Function(SignoutLoading value)? signoutLoading,
     TResult? Function(SignoutSuccess value)? signoutSuccess,
     TResult? Function(SignoutError value)? signoutError,
+    TResult? Function(SyncLoading value)? syncLoading,
+    TResult? Function(SyncSuccess value)? syncSuccess,
+    TResult? Function(SyncError value)? syncError,
+    TResult? Function(CachingTicket value)? cachingTicket,
+    TResult? Function(TicketCached value)? ticketCached,
+    TResult? Function(CachingError value)? cachingError,
   }) {
     return initial?.call(this);
   }
@@ -192,6 +264,12 @@ class _$InitialImpl implements _Initial {
     TResult Function(SignoutLoading value)? signoutLoading,
     TResult Function(SignoutSuccess value)? signoutSuccess,
     TResult Function(SignoutError value)? signoutError,
+    TResult Function(SyncLoading value)? syncLoading,
+    TResult Function(SyncSuccess value)? syncSuccess,
+    TResult Function(SyncError value)? syncError,
+    TResult Function(CachingTicket value)? cachingTicket,
+    TResult Function(TicketCached value)? ticketCached,
+    TResult Function(CachingError value)? cachingError,
     required TResult orElse(),
   }) {
     if (initial != null) {
@@ -226,12 +304,20 @@ class __$$SignoutLoadingImplCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$SignoutLoadingImpl implements SignoutLoading {
+class _$SignoutLoadingImpl
+    with DiagnosticableTreeMixin
+    implements SignoutLoading {
   const _$SignoutLoadingImpl();
 
   @override
-  String toString() {
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
     return 'HomeState.signoutLoading()';
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(DiagnosticsProperty('type', 'HomeState.signoutLoading'));
   }
 
   @override
@@ -250,6 +336,12 @@ class _$SignoutLoadingImpl implements SignoutLoading {
     required TResult Function() signoutLoading,
     required TResult Function() signoutSuccess,
     required TResult Function() signoutError,
+    required TResult Function() syncLoading,
+    required TResult Function(List<Ticket> tickets) syncSuccess,
+    required TResult Function(String message) syncError,
+    required TResult Function() cachingTicket,
+    required TResult Function() ticketCached,
+    required TResult Function(String message) cachingError,
   }) {
     return signoutLoading();
   }
@@ -261,6 +353,12 @@ class _$SignoutLoadingImpl implements SignoutLoading {
     TResult? Function()? signoutLoading,
     TResult? Function()? signoutSuccess,
     TResult? Function()? signoutError,
+    TResult? Function()? syncLoading,
+    TResult? Function(List<Ticket> tickets)? syncSuccess,
+    TResult? Function(String message)? syncError,
+    TResult? Function()? cachingTicket,
+    TResult? Function()? ticketCached,
+    TResult? Function(String message)? cachingError,
   }) {
     return signoutLoading?.call();
   }
@@ -272,6 +370,12 @@ class _$SignoutLoadingImpl implements SignoutLoading {
     TResult Function()? signoutLoading,
     TResult Function()? signoutSuccess,
     TResult Function()? signoutError,
+    TResult Function()? syncLoading,
+    TResult Function(List<Ticket> tickets)? syncSuccess,
+    TResult Function(String message)? syncError,
+    TResult Function()? cachingTicket,
+    TResult Function()? ticketCached,
+    TResult Function(String message)? cachingError,
     required TResult orElse(),
   }) {
     if (signoutLoading != null) {
@@ -287,6 +391,12 @@ class _$SignoutLoadingImpl implements SignoutLoading {
     required TResult Function(SignoutLoading value) signoutLoading,
     required TResult Function(SignoutSuccess value) signoutSuccess,
     required TResult Function(SignoutError value) signoutError,
+    required TResult Function(SyncLoading value) syncLoading,
+    required TResult Function(SyncSuccess value) syncSuccess,
+    required TResult Function(SyncError value) syncError,
+    required TResult Function(CachingTicket value) cachingTicket,
+    required TResult Function(TicketCached value) ticketCached,
+    required TResult Function(CachingError value) cachingError,
   }) {
     return signoutLoading(this);
   }
@@ -298,6 +408,12 @@ class _$SignoutLoadingImpl implements SignoutLoading {
     TResult? Function(SignoutLoading value)? signoutLoading,
     TResult? Function(SignoutSuccess value)? signoutSuccess,
     TResult? Function(SignoutError value)? signoutError,
+    TResult? Function(SyncLoading value)? syncLoading,
+    TResult? Function(SyncSuccess value)? syncSuccess,
+    TResult? Function(SyncError value)? syncError,
+    TResult? Function(CachingTicket value)? cachingTicket,
+    TResult? Function(TicketCached value)? ticketCached,
+    TResult? Function(CachingError value)? cachingError,
   }) {
     return signoutLoading?.call(this);
   }
@@ -309,6 +425,12 @@ class _$SignoutLoadingImpl implements SignoutLoading {
     TResult Function(SignoutLoading value)? signoutLoading,
     TResult Function(SignoutSuccess value)? signoutSuccess,
     TResult Function(SignoutError value)? signoutError,
+    TResult Function(SyncLoading value)? syncLoading,
+    TResult Function(SyncSuccess value)? syncSuccess,
+    TResult Function(SyncError value)? syncError,
+    TResult Function(CachingTicket value)? cachingTicket,
+    TResult Function(TicketCached value)? ticketCached,
+    TResult Function(CachingError value)? cachingError,
     required TResult orElse(),
   }) {
     if (signoutLoading != null) {
@@ -343,12 +465,20 @@ class __$$SignoutSuccessImplCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$SignoutSuccessImpl implements SignoutSuccess {
+class _$SignoutSuccessImpl
+    with DiagnosticableTreeMixin
+    implements SignoutSuccess {
   const _$SignoutSuccessImpl();
 
   @override
-  String toString() {
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
     return 'HomeState.signoutSuccess()';
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(DiagnosticsProperty('type', 'HomeState.signoutSuccess'));
   }
 
   @override
@@ -367,6 +497,12 @@ class _$SignoutSuccessImpl implements SignoutSuccess {
     required TResult Function() signoutLoading,
     required TResult Function() signoutSuccess,
     required TResult Function() signoutError,
+    required TResult Function() syncLoading,
+    required TResult Function(List<Ticket> tickets) syncSuccess,
+    required TResult Function(String message) syncError,
+    required TResult Function() cachingTicket,
+    required TResult Function() ticketCached,
+    required TResult Function(String message) cachingError,
   }) {
     return signoutSuccess();
   }
@@ -378,6 +514,12 @@ class _$SignoutSuccessImpl implements SignoutSuccess {
     TResult? Function()? signoutLoading,
     TResult? Function()? signoutSuccess,
     TResult? Function()? signoutError,
+    TResult? Function()? syncLoading,
+    TResult? Function(List<Ticket> tickets)? syncSuccess,
+    TResult? Function(String message)? syncError,
+    TResult? Function()? cachingTicket,
+    TResult? Function()? ticketCached,
+    TResult? Function(String message)? cachingError,
   }) {
     return signoutSuccess?.call();
   }
@@ -389,6 +531,12 @@ class _$SignoutSuccessImpl implements SignoutSuccess {
     TResult Function()? signoutLoading,
     TResult Function()? signoutSuccess,
     TResult Function()? signoutError,
+    TResult Function()? syncLoading,
+    TResult Function(List<Ticket> tickets)? syncSuccess,
+    TResult Function(String message)? syncError,
+    TResult Function()? cachingTicket,
+    TResult Function()? ticketCached,
+    TResult Function(String message)? cachingError,
     required TResult orElse(),
   }) {
     if (signoutSuccess != null) {
@@ -404,6 +552,12 @@ class _$SignoutSuccessImpl implements SignoutSuccess {
     required TResult Function(SignoutLoading value) signoutLoading,
     required TResult Function(SignoutSuccess value) signoutSuccess,
     required TResult Function(SignoutError value) signoutError,
+    required TResult Function(SyncLoading value) syncLoading,
+    required TResult Function(SyncSuccess value) syncSuccess,
+    required TResult Function(SyncError value) syncError,
+    required TResult Function(CachingTicket value) cachingTicket,
+    required TResult Function(TicketCached value) ticketCached,
+    required TResult Function(CachingError value) cachingError,
   }) {
     return signoutSuccess(this);
   }
@@ -415,6 +569,12 @@ class _$SignoutSuccessImpl implements SignoutSuccess {
     TResult? Function(SignoutLoading value)? signoutLoading,
     TResult? Function(SignoutSuccess value)? signoutSuccess,
     TResult? Function(SignoutError value)? signoutError,
+    TResult? Function(SyncLoading value)? syncLoading,
+    TResult? Function(SyncSuccess value)? syncSuccess,
+    TResult? Function(SyncError value)? syncError,
+    TResult? Function(CachingTicket value)? cachingTicket,
+    TResult? Function(TicketCached value)? ticketCached,
+    TResult? Function(CachingError value)? cachingError,
   }) {
     return signoutSuccess?.call(this);
   }
@@ -426,6 +586,12 @@ class _$SignoutSuccessImpl implements SignoutSuccess {
     TResult Function(SignoutLoading value)? signoutLoading,
     TResult Function(SignoutSuccess value)? signoutSuccess,
     TResult Function(SignoutError value)? signoutError,
+    TResult Function(SyncLoading value)? syncLoading,
+    TResult Function(SyncSuccess value)? syncSuccess,
+    TResult Function(SyncError value)? syncError,
+    TResult Function(CachingTicket value)? cachingTicket,
+    TResult Function(TicketCached value)? ticketCached,
+    TResult Function(CachingError value)? cachingError,
     required TResult orElse(),
   }) {
     if (signoutSuccess != null) {
@@ -460,12 +626,18 @@ class __$$SignoutErrorImplCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$SignoutErrorImpl implements SignoutError {
+class _$SignoutErrorImpl with DiagnosticableTreeMixin implements SignoutError {
   const _$SignoutErrorImpl();
 
   @override
-  String toString() {
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
     return 'HomeState.signoutError()';
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(DiagnosticsProperty('type', 'HomeState.signoutError'));
   }
 
   @override
@@ -484,6 +656,12 @@ class _$SignoutErrorImpl implements SignoutError {
     required TResult Function() signoutLoading,
     required TResult Function() signoutSuccess,
     required TResult Function() signoutError,
+    required TResult Function() syncLoading,
+    required TResult Function(List<Ticket> tickets) syncSuccess,
+    required TResult Function(String message) syncError,
+    required TResult Function() cachingTicket,
+    required TResult Function() ticketCached,
+    required TResult Function(String message) cachingError,
   }) {
     return signoutError();
   }
@@ -495,6 +673,12 @@ class _$SignoutErrorImpl implements SignoutError {
     TResult? Function()? signoutLoading,
     TResult? Function()? signoutSuccess,
     TResult? Function()? signoutError,
+    TResult? Function()? syncLoading,
+    TResult? Function(List<Ticket> tickets)? syncSuccess,
+    TResult? Function(String message)? syncError,
+    TResult? Function()? cachingTicket,
+    TResult? Function()? ticketCached,
+    TResult? Function(String message)? cachingError,
   }) {
     return signoutError?.call();
   }
@@ -506,6 +690,12 @@ class _$SignoutErrorImpl implements SignoutError {
     TResult Function()? signoutLoading,
     TResult Function()? signoutSuccess,
     TResult Function()? signoutError,
+    TResult Function()? syncLoading,
+    TResult Function(List<Ticket> tickets)? syncSuccess,
+    TResult Function(String message)? syncError,
+    TResult Function()? cachingTicket,
+    TResult Function()? ticketCached,
+    TResult Function(String message)? cachingError,
     required TResult orElse(),
   }) {
     if (signoutError != null) {
@@ -521,6 +711,12 @@ class _$SignoutErrorImpl implements SignoutError {
     required TResult Function(SignoutLoading value) signoutLoading,
     required TResult Function(SignoutSuccess value) signoutSuccess,
     required TResult Function(SignoutError value) signoutError,
+    required TResult Function(SyncLoading value) syncLoading,
+    required TResult Function(SyncSuccess value) syncSuccess,
+    required TResult Function(SyncError value) syncError,
+    required TResult Function(CachingTicket value) cachingTicket,
+    required TResult Function(TicketCached value) ticketCached,
+    required TResult Function(CachingError value) cachingError,
   }) {
     return signoutError(this);
   }
@@ -532,6 +728,12 @@ class _$SignoutErrorImpl implements SignoutError {
     TResult? Function(SignoutLoading value)? signoutLoading,
     TResult? Function(SignoutSuccess value)? signoutSuccess,
     TResult? Function(SignoutError value)? signoutError,
+    TResult? Function(SyncLoading value)? syncLoading,
+    TResult? Function(SyncSuccess value)? syncSuccess,
+    TResult? Function(SyncError value)? syncError,
+    TResult? Function(CachingTicket value)? cachingTicket,
+    TResult? Function(TicketCached value)? ticketCached,
+    TResult? Function(CachingError value)? cachingError,
   }) {
     return signoutError?.call(this);
   }
@@ -543,6 +745,12 @@ class _$SignoutErrorImpl implements SignoutError {
     TResult Function(SignoutLoading value)? signoutLoading,
     TResult Function(SignoutSuccess value)? signoutSuccess,
     TResult Function(SignoutError value)? signoutError,
+    TResult Function(SyncLoading value)? syncLoading,
+    TResult Function(SyncSuccess value)? syncSuccess,
+    TResult Function(SyncError value)? syncError,
+    TResult Function(CachingTicket value)? cachingTicket,
+    TResult Function(TicketCached value)? ticketCached,
+    TResult Function(CachingError value)? cachingError,
     required TResult orElse(),
   }) {
     if (signoutError != null) {
@@ -554,4 +762,1077 @@ class _$SignoutErrorImpl implements SignoutError {
 
 abstract class SignoutError implements HomeState {
   const factory SignoutError() = _$SignoutErrorImpl;
+}
+
+/// @nodoc
+abstract class _$$SyncLoadingImplCopyWith<$Res> {
+  factory _$$SyncLoadingImplCopyWith(
+          _$SyncLoadingImpl value, $Res Function(_$SyncLoadingImpl) then) =
+      __$$SyncLoadingImplCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$$SyncLoadingImplCopyWithImpl<$Res>
+    extends _$HomeStateCopyWithImpl<$Res, _$SyncLoadingImpl>
+    implements _$$SyncLoadingImplCopyWith<$Res> {
+  __$$SyncLoadingImplCopyWithImpl(
+      _$SyncLoadingImpl _value, $Res Function(_$SyncLoadingImpl) _then)
+      : super(_value, _then);
+
+  /// Create a copy of HomeState
+  /// with the given fields replaced by the non-null parameter values.
+}
+
+/// @nodoc
+
+class _$SyncLoadingImpl with DiagnosticableTreeMixin implements SyncLoading {
+  const _$SyncLoadingImpl();
+
+  @override
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
+    return 'HomeState.syncLoading()';
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(DiagnosticsProperty('type', 'HomeState.syncLoading'));
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType && other is _$SyncLoadingImpl);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() initial,
+    required TResult Function() signoutLoading,
+    required TResult Function() signoutSuccess,
+    required TResult Function() signoutError,
+    required TResult Function() syncLoading,
+    required TResult Function(List<Ticket> tickets) syncSuccess,
+    required TResult Function(String message) syncError,
+    required TResult Function() cachingTicket,
+    required TResult Function() ticketCached,
+    required TResult Function(String message) cachingError,
+  }) {
+    return syncLoading();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? initial,
+    TResult? Function()? signoutLoading,
+    TResult? Function()? signoutSuccess,
+    TResult? Function()? signoutError,
+    TResult? Function()? syncLoading,
+    TResult? Function(List<Ticket> tickets)? syncSuccess,
+    TResult? Function(String message)? syncError,
+    TResult? Function()? cachingTicket,
+    TResult? Function()? ticketCached,
+    TResult? Function(String message)? cachingError,
+  }) {
+    return syncLoading?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? initial,
+    TResult Function()? signoutLoading,
+    TResult Function()? signoutSuccess,
+    TResult Function()? signoutError,
+    TResult Function()? syncLoading,
+    TResult Function(List<Ticket> tickets)? syncSuccess,
+    TResult Function(String message)? syncError,
+    TResult Function()? cachingTicket,
+    TResult Function()? ticketCached,
+    TResult Function(String message)? cachingError,
+    required TResult orElse(),
+  }) {
+    if (syncLoading != null) {
+      return syncLoading();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Initial value) initial,
+    required TResult Function(SignoutLoading value) signoutLoading,
+    required TResult Function(SignoutSuccess value) signoutSuccess,
+    required TResult Function(SignoutError value) signoutError,
+    required TResult Function(SyncLoading value) syncLoading,
+    required TResult Function(SyncSuccess value) syncSuccess,
+    required TResult Function(SyncError value) syncError,
+    required TResult Function(CachingTicket value) cachingTicket,
+    required TResult Function(TicketCached value) ticketCached,
+    required TResult Function(CachingError value) cachingError,
+  }) {
+    return syncLoading(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_Initial value)? initial,
+    TResult? Function(SignoutLoading value)? signoutLoading,
+    TResult? Function(SignoutSuccess value)? signoutSuccess,
+    TResult? Function(SignoutError value)? signoutError,
+    TResult? Function(SyncLoading value)? syncLoading,
+    TResult? Function(SyncSuccess value)? syncSuccess,
+    TResult? Function(SyncError value)? syncError,
+    TResult? Function(CachingTicket value)? cachingTicket,
+    TResult? Function(TicketCached value)? ticketCached,
+    TResult? Function(CachingError value)? cachingError,
+  }) {
+    return syncLoading?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Initial value)? initial,
+    TResult Function(SignoutLoading value)? signoutLoading,
+    TResult Function(SignoutSuccess value)? signoutSuccess,
+    TResult Function(SignoutError value)? signoutError,
+    TResult Function(SyncLoading value)? syncLoading,
+    TResult Function(SyncSuccess value)? syncSuccess,
+    TResult Function(SyncError value)? syncError,
+    TResult Function(CachingTicket value)? cachingTicket,
+    TResult Function(TicketCached value)? ticketCached,
+    TResult Function(CachingError value)? cachingError,
+    required TResult orElse(),
+  }) {
+    if (syncLoading != null) {
+      return syncLoading(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class SyncLoading implements HomeState {
+  const factory SyncLoading() = _$SyncLoadingImpl;
+}
+
+/// @nodoc
+abstract class _$$SyncSuccessImplCopyWith<$Res> {
+  factory _$$SyncSuccessImplCopyWith(
+          _$SyncSuccessImpl value, $Res Function(_$SyncSuccessImpl) then) =
+      __$$SyncSuccessImplCopyWithImpl<$Res>;
+  @useResult
+  $Res call({List<Ticket> tickets});
+}
+
+/// @nodoc
+class __$$SyncSuccessImplCopyWithImpl<$Res>
+    extends _$HomeStateCopyWithImpl<$Res, _$SyncSuccessImpl>
+    implements _$$SyncSuccessImplCopyWith<$Res> {
+  __$$SyncSuccessImplCopyWithImpl(
+      _$SyncSuccessImpl _value, $Res Function(_$SyncSuccessImpl) _then)
+      : super(_value, _then);
+
+  /// Create a copy of HomeState
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? tickets = null,
+  }) {
+    return _then(_$SyncSuccessImpl(
+      null == tickets
+          ? _value._tickets
+          : tickets // ignore: cast_nullable_to_non_nullable
+              as List<Ticket>,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$SyncSuccessImpl with DiagnosticableTreeMixin implements SyncSuccess {
+  const _$SyncSuccessImpl(final List<Ticket> tickets) : _tickets = tickets;
+
+  final List<Ticket> _tickets;
+  @override
+  List<Ticket> get tickets {
+    if (_tickets is EqualUnmodifiableListView) return _tickets;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_tickets);
+  }
+
+  @override
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
+    return 'HomeState.syncSuccess(tickets: $tickets)';
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties
+      ..add(DiagnosticsProperty('type', 'HomeState.syncSuccess'))
+      ..add(DiagnosticsProperty('tickets', tickets));
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$SyncSuccessImpl &&
+            const DeepCollectionEquality().equals(other._tickets, _tickets));
+  }
+
+  @override
+  int get hashCode =>
+      Object.hash(runtimeType, const DeepCollectionEquality().hash(_tickets));
+
+  /// Create a copy of HomeState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$SyncSuccessImplCopyWith<_$SyncSuccessImpl> get copyWith =>
+      __$$SyncSuccessImplCopyWithImpl<_$SyncSuccessImpl>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() initial,
+    required TResult Function() signoutLoading,
+    required TResult Function() signoutSuccess,
+    required TResult Function() signoutError,
+    required TResult Function() syncLoading,
+    required TResult Function(List<Ticket> tickets) syncSuccess,
+    required TResult Function(String message) syncError,
+    required TResult Function() cachingTicket,
+    required TResult Function() ticketCached,
+    required TResult Function(String message) cachingError,
+  }) {
+    return syncSuccess(tickets);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? initial,
+    TResult? Function()? signoutLoading,
+    TResult? Function()? signoutSuccess,
+    TResult? Function()? signoutError,
+    TResult? Function()? syncLoading,
+    TResult? Function(List<Ticket> tickets)? syncSuccess,
+    TResult? Function(String message)? syncError,
+    TResult? Function()? cachingTicket,
+    TResult? Function()? ticketCached,
+    TResult? Function(String message)? cachingError,
+  }) {
+    return syncSuccess?.call(tickets);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? initial,
+    TResult Function()? signoutLoading,
+    TResult Function()? signoutSuccess,
+    TResult Function()? signoutError,
+    TResult Function()? syncLoading,
+    TResult Function(List<Ticket> tickets)? syncSuccess,
+    TResult Function(String message)? syncError,
+    TResult Function()? cachingTicket,
+    TResult Function()? ticketCached,
+    TResult Function(String message)? cachingError,
+    required TResult orElse(),
+  }) {
+    if (syncSuccess != null) {
+      return syncSuccess(tickets);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Initial value) initial,
+    required TResult Function(SignoutLoading value) signoutLoading,
+    required TResult Function(SignoutSuccess value) signoutSuccess,
+    required TResult Function(SignoutError value) signoutError,
+    required TResult Function(SyncLoading value) syncLoading,
+    required TResult Function(SyncSuccess value) syncSuccess,
+    required TResult Function(SyncError value) syncError,
+    required TResult Function(CachingTicket value) cachingTicket,
+    required TResult Function(TicketCached value) ticketCached,
+    required TResult Function(CachingError value) cachingError,
+  }) {
+    return syncSuccess(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_Initial value)? initial,
+    TResult? Function(SignoutLoading value)? signoutLoading,
+    TResult? Function(SignoutSuccess value)? signoutSuccess,
+    TResult? Function(SignoutError value)? signoutError,
+    TResult? Function(SyncLoading value)? syncLoading,
+    TResult? Function(SyncSuccess value)? syncSuccess,
+    TResult? Function(SyncError value)? syncError,
+    TResult? Function(CachingTicket value)? cachingTicket,
+    TResult? Function(TicketCached value)? ticketCached,
+    TResult? Function(CachingError value)? cachingError,
+  }) {
+    return syncSuccess?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Initial value)? initial,
+    TResult Function(SignoutLoading value)? signoutLoading,
+    TResult Function(SignoutSuccess value)? signoutSuccess,
+    TResult Function(SignoutError value)? signoutError,
+    TResult Function(SyncLoading value)? syncLoading,
+    TResult Function(SyncSuccess value)? syncSuccess,
+    TResult Function(SyncError value)? syncError,
+    TResult Function(CachingTicket value)? cachingTicket,
+    TResult Function(TicketCached value)? ticketCached,
+    TResult Function(CachingError value)? cachingError,
+    required TResult orElse(),
+  }) {
+    if (syncSuccess != null) {
+      return syncSuccess(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class SyncSuccess implements HomeState {
+  const factory SyncSuccess(final List<Ticket> tickets) = _$SyncSuccessImpl;
+
+  List<Ticket> get tickets;
+
+  /// Create a copy of HomeState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  _$$SyncSuccessImplCopyWith<_$SyncSuccessImpl> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$SyncErrorImplCopyWith<$Res> {
+  factory _$$SyncErrorImplCopyWith(
+          _$SyncErrorImpl value, $Res Function(_$SyncErrorImpl) then) =
+      __$$SyncErrorImplCopyWithImpl<$Res>;
+  @useResult
+  $Res call({String message});
+}
+
+/// @nodoc
+class __$$SyncErrorImplCopyWithImpl<$Res>
+    extends _$HomeStateCopyWithImpl<$Res, _$SyncErrorImpl>
+    implements _$$SyncErrorImplCopyWith<$Res> {
+  __$$SyncErrorImplCopyWithImpl(
+      _$SyncErrorImpl _value, $Res Function(_$SyncErrorImpl) _then)
+      : super(_value, _then);
+
+  /// Create a copy of HomeState
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? message = null,
+  }) {
+    return _then(_$SyncErrorImpl(
+      null == message
+          ? _value.message
+          : message // ignore: cast_nullable_to_non_nullable
+              as String,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$SyncErrorImpl with DiagnosticableTreeMixin implements SyncError {
+  const _$SyncErrorImpl(this.message);
+
+  @override
+  final String message;
+
+  @override
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
+    return 'HomeState.syncError(message: $message)';
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties
+      ..add(DiagnosticsProperty('type', 'HomeState.syncError'))
+      ..add(DiagnosticsProperty('message', message));
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$SyncErrorImpl &&
+            (identical(other.message, message) || other.message == message));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, message);
+
+  /// Create a copy of HomeState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$SyncErrorImplCopyWith<_$SyncErrorImpl> get copyWith =>
+      __$$SyncErrorImplCopyWithImpl<_$SyncErrorImpl>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() initial,
+    required TResult Function() signoutLoading,
+    required TResult Function() signoutSuccess,
+    required TResult Function() signoutError,
+    required TResult Function() syncLoading,
+    required TResult Function(List<Ticket> tickets) syncSuccess,
+    required TResult Function(String message) syncError,
+    required TResult Function() cachingTicket,
+    required TResult Function() ticketCached,
+    required TResult Function(String message) cachingError,
+  }) {
+    return syncError(message);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? initial,
+    TResult? Function()? signoutLoading,
+    TResult? Function()? signoutSuccess,
+    TResult? Function()? signoutError,
+    TResult? Function()? syncLoading,
+    TResult? Function(List<Ticket> tickets)? syncSuccess,
+    TResult? Function(String message)? syncError,
+    TResult? Function()? cachingTicket,
+    TResult? Function()? ticketCached,
+    TResult? Function(String message)? cachingError,
+  }) {
+    return syncError?.call(message);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? initial,
+    TResult Function()? signoutLoading,
+    TResult Function()? signoutSuccess,
+    TResult Function()? signoutError,
+    TResult Function()? syncLoading,
+    TResult Function(List<Ticket> tickets)? syncSuccess,
+    TResult Function(String message)? syncError,
+    TResult Function()? cachingTicket,
+    TResult Function()? ticketCached,
+    TResult Function(String message)? cachingError,
+    required TResult orElse(),
+  }) {
+    if (syncError != null) {
+      return syncError(message);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Initial value) initial,
+    required TResult Function(SignoutLoading value) signoutLoading,
+    required TResult Function(SignoutSuccess value) signoutSuccess,
+    required TResult Function(SignoutError value) signoutError,
+    required TResult Function(SyncLoading value) syncLoading,
+    required TResult Function(SyncSuccess value) syncSuccess,
+    required TResult Function(SyncError value) syncError,
+    required TResult Function(CachingTicket value) cachingTicket,
+    required TResult Function(TicketCached value) ticketCached,
+    required TResult Function(CachingError value) cachingError,
+  }) {
+    return syncError(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_Initial value)? initial,
+    TResult? Function(SignoutLoading value)? signoutLoading,
+    TResult? Function(SignoutSuccess value)? signoutSuccess,
+    TResult? Function(SignoutError value)? signoutError,
+    TResult? Function(SyncLoading value)? syncLoading,
+    TResult? Function(SyncSuccess value)? syncSuccess,
+    TResult? Function(SyncError value)? syncError,
+    TResult? Function(CachingTicket value)? cachingTicket,
+    TResult? Function(TicketCached value)? ticketCached,
+    TResult? Function(CachingError value)? cachingError,
+  }) {
+    return syncError?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Initial value)? initial,
+    TResult Function(SignoutLoading value)? signoutLoading,
+    TResult Function(SignoutSuccess value)? signoutSuccess,
+    TResult Function(SignoutError value)? signoutError,
+    TResult Function(SyncLoading value)? syncLoading,
+    TResult Function(SyncSuccess value)? syncSuccess,
+    TResult Function(SyncError value)? syncError,
+    TResult Function(CachingTicket value)? cachingTicket,
+    TResult Function(TicketCached value)? ticketCached,
+    TResult Function(CachingError value)? cachingError,
+    required TResult orElse(),
+  }) {
+    if (syncError != null) {
+      return syncError(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class SyncError implements HomeState {
+  const factory SyncError(final String message) = _$SyncErrorImpl;
+
+  String get message;
+
+  /// Create a copy of HomeState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  _$$SyncErrorImplCopyWith<_$SyncErrorImpl> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$CachingTicketImplCopyWith<$Res> {
+  factory _$$CachingTicketImplCopyWith(
+          _$CachingTicketImpl value, $Res Function(_$CachingTicketImpl) then) =
+      __$$CachingTicketImplCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$$CachingTicketImplCopyWithImpl<$Res>
+    extends _$HomeStateCopyWithImpl<$Res, _$CachingTicketImpl>
+    implements _$$CachingTicketImplCopyWith<$Res> {
+  __$$CachingTicketImplCopyWithImpl(
+      _$CachingTicketImpl _value, $Res Function(_$CachingTicketImpl) _then)
+      : super(_value, _then);
+
+  /// Create a copy of HomeState
+  /// with the given fields replaced by the non-null parameter values.
+}
+
+/// @nodoc
+
+class _$CachingTicketImpl
+    with DiagnosticableTreeMixin
+    implements CachingTicket {
+  const _$CachingTicketImpl();
+
+  @override
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
+    return 'HomeState.cachingTicket()';
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(DiagnosticsProperty('type', 'HomeState.cachingTicket'));
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType && other is _$CachingTicketImpl);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() initial,
+    required TResult Function() signoutLoading,
+    required TResult Function() signoutSuccess,
+    required TResult Function() signoutError,
+    required TResult Function() syncLoading,
+    required TResult Function(List<Ticket> tickets) syncSuccess,
+    required TResult Function(String message) syncError,
+    required TResult Function() cachingTicket,
+    required TResult Function() ticketCached,
+    required TResult Function(String message) cachingError,
+  }) {
+    return cachingTicket();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? initial,
+    TResult? Function()? signoutLoading,
+    TResult? Function()? signoutSuccess,
+    TResult? Function()? signoutError,
+    TResult? Function()? syncLoading,
+    TResult? Function(List<Ticket> tickets)? syncSuccess,
+    TResult? Function(String message)? syncError,
+    TResult? Function()? cachingTicket,
+    TResult? Function()? ticketCached,
+    TResult? Function(String message)? cachingError,
+  }) {
+    return cachingTicket?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? initial,
+    TResult Function()? signoutLoading,
+    TResult Function()? signoutSuccess,
+    TResult Function()? signoutError,
+    TResult Function()? syncLoading,
+    TResult Function(List<Ticket> tickets)? syncSuccess,
+    TResult Function(String message)? syncError,
+    TResult Function()? cachingTicket,
+    TResult Function()? ticketCached,
+    TResult Function(String message)? cachingError,
+    required TResult orElse(),
+  }) {
+    if (cachingTicket != null) {
+      return cachingTicket();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Initial value) initial,
+    required TResult Function(SignoutLoading value) signoutLoading,
+    required TResult Function(SignoutSuccess value) signoutSuccess,
+    required TResult Function(SignoutError value) signoutError,
+    required TResult Function(SyncLoading value) syncLoading,
+    required TResult Function(SyncSuccess value) syncSuccess,
+    required TResult Function(SyncError value) syncError,
+    required TResult Function(CachingTicket value) cachingTicket,
+    required TResult Function(TicketCached value) ticketCached,
+    required TResult Function(CachingError value) cachingError,
+  }) {
+    return cachingTicket(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_Initial value)? initial,
+    TResult? Function(SignoutLoading value)? signoutLoading,
+    TResult? Function(SignoutSuccess value)? signoutSuccess,
+    TResult? Function(SignoutError value)? signoutError,
+    TResult? Function(SyncLoading value)? syncLoading,
+    TResult? Function(SyncSuccess value)? syncSuccess,
+    TResult? Function(SyncError value)? syncError,
+    TResult? Function(CachingTicket value)? cachingTicket,
+    TResult? Function(TicketCached value)? ticketCached,
+    TResult? Function(CachingError value)? cachingError,
+  }) {
+    return cachingTicket?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Initial value)? initial,
+    TResult Function(SignoutLoading value)? signoutLoading,
+    TResult Function(SignoutSuccess value)? signoutSuccess,
+    TResult Function(SignoutError value)? signoutError,
+    TResult Function(SyncLoading value)? syncLoading,
+    TResult Function(SyncSuccess value)? syncSuccess,
+    TResult Function(SyncError value)? syncError,
+    TResult Function(CachingTicket value)? cachingTicket,
+    TResult Function(TicketCached value)? ticketCached,
+    TResult Function(CachingError value)? cachingError,
+    required TResult orElse(),
+  }) {
+    if (cachingTicket != null) {
+      return cachingTicket(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class CachingTicket implements HomeState {
+  const factory CachingTicket() = _$CachingTicketImpl;
+}
+
+/// @nodoc
+abstract class _$$TicketCachedImplCopyWith<$Res> {
+  factory _$$TicketCachedImplCopyWith(
+          _$TicketCachedImpl value, $Res Function(_$TicketCachedImpl) then) =
+      __$$TicketCachedImplCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$$TicketCachedImplCopyWithImpl<$Res>
+    extends _$HomeStateCopyWithImpl<$Res, _$TicketCachedImpl>
+    implements _$$TicketCachedImplCopyWith<$Res> {
+  __$$TicketCachedImplCopyWithImpl(
+      _$TicketCachedImpl _value, $Res Function(_$TicketCachedImpl) _then)
+      : super(_value, _then);
+
+  /// Create a copy of HomeState
+  /// with the given fields replaced by the non-null parameter values.
+}
+
+/// @nodoc
+
+class _$TicketCachedImpl with DiagnosticableTreeMixin implements TicketCached {
+  const _$TicketCachedImpl();
+
+  @override
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
+    return 'HomeState.ticketCached()';
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(DiagnosticsProperty('type', 'HomeState.ticketCached'));
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType && other is _$TicketCachedImpl);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() initial,
+    required TResult Function() signoutLoading,
+    required TResult Function() signoutSuccess,
+    required TResult Function() signoutError,
+    required TResult Function() syncLoading,
+    required TResult Function(List<Ticket> tickets) syncSuccess,
+    required TResult Function(String message) syncError,
+    required TResult Function() cachingTicket,
+    required TResult Function() ticketCached,
+    required TResult Function(String message) cachingError,
+  }) {
+    return ticketCached();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? initial,
+    TResult? Function()? signoutLoading,
+    TResult? Function()? signoutSuccess,
+    TResult? Function()? signoutError,
+    TResult? Function()? syncLoading,
+    TResult? Function(List<Ticket> tickets)? syncSuccess,
+    TResult? Function(String message)? syncError,
+    TResult? Function()? cachingTicket,
+    TResult? Function()? ticketCached,
+    TResult? Function(String message)? cachingError,
+  }) {
+    return ticketCached?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? initial,
+    TResult Function()? signoutLoading,
+    TResult Function()? signoutSuccess,
+    TResult Function()? signoutError,
+    TResult Function()? syncLoading,
+    TResult Function(List<Ticket> tickets)? syncSuccess,
+    TResult Function(String message)? syncError,
+    TResult Function()? cachingTicket,
+    TResult Function()? ticketCached,
+    TResult Function(String message)? cachingError,
+    required TResult orElse(),
+  }) {
+    if (ticketCached != null) {
+      return ticketCached();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Initial value) initial,
+    required TResult Function(SignoutLoading value) signoutLoading,
+    required TResult Function(SignoutSuccess value) signoutSuccess,
+    required TResult Function(SignoutError value) signoutError,
+    required TResult Function(SyncLoading value) syncLoading,
+    required TResult Function(SyncSuccess value) syncSuccess,
+    required TResult Function(SyncError value) syncError,
+    required TResult Function(CachingTicket value) cachingTicket,
+    required TResult Function(TicketCached value) ticketCached,
+    required TResult Function(CachingError value) cachingError,
+  }) {
+    return ticketCached(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_Initial value)? initial,
+    TResult? Function(SignoutLoading value)? signoutLoading,
+    TResult? Function(SignoutSuccess value)? signoutSuccess,
+    TResult? Function(SignoutError value)? signoutError,
+    TResult? Function(SyncLoading value)? syncLoading,
+    TResult? Function(SyncSuccess value)? syncSuccess,
+    TResult? Function(SyncError value)? syncError,
+    TResult? Function(CachingTicket value)? cachingTicket,
+    TResult? Function(TicketCached value)? ticketCached,
+    TResult? Function(CachingError value)? cachingError,
+  }) {
+    return ticketCached?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Initial value)? initial,
+    TResult Function(SignoutLoading value)? signoutLoading,
+    TResult Function(SignoutSuccess value)? signoutSuccess,
+    TResult Function(SignoutError value)? signoutError,
+    TResult Function(SyncLoading value)? syncLoading,
+    TResult Function(SyncSuccess value)? syncSuccess,
+    TResult Function(SyncError value)? syncError,
+    TResult Function(CachingTicket value)? cachingTicket,
+    TResult Function(TicketCached value)? ticketCached,
+    TResult Function(CachingError value)? cachingError,
+    required TResult orElse(),
+  }) {
+    if (ticketCached != null) {
+      return ticketCached(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class TicketCached implements HomeState {
+  const factory TicketCached() = _$TicketCachedImpl;
+}
+
+/// @nodoc
+abstract class _$$CachingErrorImplCopyWith<$Res> {
+  factory _$$CachingErrorImplCopyWith(
+          _$CachingErrorImpl value, $Res Function(_$CachingErrorImpl) then) =
+      __$$CachingErrorImplCopyWithImpl<$Res>;
+  @useResult
+  $Res call({String message});
+}
+
+/// @nodoc
+class __$$CachingErrorImplCopyWithImpl<$Res>
+    extends _$HomeStateCopyWithImpl<$Res, _$CachingErrorImpl>
+    implements _$$CachingErrorImplCopyWith<$Res> {
+  __$$CachingErrorImplCopyWithImpl(
+      _$CachingErrorImpl _value, $Res Function(_$CachingErrorImpl) _then)
+      : super(_value, _then);
+
+  /// Create a copy of HomeState
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? message = null,
+  }) {
+    return _then(_$CachingErrorImpl(
+      null == message
+          ? _value.message
+          : message // ignore: cast_nullable_to_non_nullable
+              as String,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$CachingErrorImpl with DiagnosticableTreeMixin implements CachingError {
+  const _$CachingErrorImpl(this.message);
+
+  @override
+  final String message;
+
+  @override
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
+    return 'HomeState.cachingError(message: $message)';
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties
+      ..add(DiagnosticsProperty('type', 'HomeState.cachingError'))
+      ..add(DiagnosticsProperty('message', message));
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$CachingErrorImpl &&
+            (identical(other.message, message) || other.message == message));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, message);
+
+  /// Create a copy of HomeState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$CachingErrorImplCopyWith<_$CachingErrorImpl> get copyWith =>
+      __$$CachingErrorImplCopyWithImpl<_$CachingErrorImpl>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() initial,
+    required TResult Function() signoutLoading,
+    required TResult Function() signoutSuccess,
+    required TResult Function() signoutError,
+    required TResult Function() syncLoading,
+    required TResult Function(List<Ticket> tickets) syncSuccess,
+    required TResult Function(String message) syncError,
+    required TResult Function() cachingTicket,
+    required TResult Function() ticketCached,
+    required TResult Function(String message) cachingError,
+  }) {
+    return cachingError(message);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? initial,
+    TResult? Function()? signoutLoading,
+    TResult? Function()? signoutSuccess,
+    TResult? Function()? signoutError,
+    TResult? Function()? syncLoading,
+    TResult? Function(List<Ticket> tickets)? syncSuccess,
+    TResult? Function(String message)? syncError,
+    TResult? Function()? cachingTicket,
+    TResult? Function()? ticketCached,
+    TResult? Function(String message)? cachingError,
+  }) {
+    return cachingError?.call(message);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? initial,
+    TResult Function()? signoutLoading,
+    TResult Function()? signoutSuccess,
+    TResult Function()? signoutError,
+    TResult Function()? syncLoading,
+    TResult Function(List<Ticket> tickets)? syncSuccess,
+    TResult Function(String message)? syncError,
+    TResult Function()? cachingTicket,
+    TResult Function()? ticketCached,
+    TResult Function(String message)? cachingError,
+    required TResult orElse(),
+  }) {
+    if (cachingError != null) {
+      return cachingError(message);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Initial value) initial,
+    required TResult Function(SignoutLoading value) signoutLoading,
+    required TResult Function(SignoutSuccess value) signoutSuccess,
+    required TResult Function(SignoutError value) signoutError,
+    required TResult Function(SyncLoading value) syncLoading,
+    required TResult Function(SyncSuccess value) syncSuccess,
+    required TResult Function(SyncError value) syncError,
+    required TResult Function(CachingTicket value) cachingTicket,
+    required TResult Function(TicketCached value) ticketCached,
+    required TResult Function(CachingError value) cachingError,
+  }) {
+    return cachingError(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_Initial value)? initial,
+    TResult? Function(SignoutLoading value)? signoutLoading,
+    TResult? Function(SignoutSuccess value)? signoutSuccess,
+    TResult? Function(SignoutError value)? signoutError,
+    TResult? Function(SyncLoading value)? syncLoading,
+    TResult? Function(SyncSuccess value)? syncSuccess,
+    TResult? Function(SyncError value)? syncError,
+    TResult? Function(CachingTicket value)? cachingTicket,
+    TResult? Function(TicketCached value)? ticketCached,
+    TResult? Function(CachingError value)? cachingError,
+  }) {
+    return cachingError?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Initial value)? initial,
+    TResult Function(SignoutLoading value)? signoutLoading,
+    TResult Function(SignoutSuccess value)? signoutSuccess,
+    TResult Function(SignoutError value)? signoutError,
+    TResult Function(SyncLoading value)? syncLoading,
+    TResult Function(SyncSuccess value)? syncSuccess,
+    TResult Function(SyncError value)? syncError,
+    TResult Function(CachingTicket value)? cachingTicket,
+    TResult Function(TicketCached value)? ticketCached,
+    TResult Function(CachingError value)? cachingError,
+    required TResult orElse(),
+  }) {
+    if (cachingError != null) {
+      return cachingError(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class CachingError implements HomeState {
+  const factory CachingError(final String message) = _$CachingErrorImpl;
+
+  String get message;
+
+  /// Create a copy of HomeState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  _$$CachingErrorImplCopyWith<_$CachingErrorImpl> get copyWith =>
+      throw _privateConstructorUsedError;
 }

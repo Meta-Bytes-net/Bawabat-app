@@ -1,6 +1,7 @@
 import 'package:bwabat/core/helpers/constants.dart';
 import 'package:bwabat/core/routing/app_router.dart';
 import 'package:bwabat/core/routing/routes.dart';
+import 'package:device_preview_plus/device_preview_plus.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -14,8 +15,11 @@ class BwabatApp extends StatelessWidget {
     return ScreenUtilInit(
         designSize: const Size(428, 926),
         minTextAdapt: true,
+        
         child: MaterialApp(
           navigatorKey: NavigationService.navigatorkey,
+      locale: DevicePreview.locale(context),
+      builder: DevicePreview.appBuilder,
           title: 'Bawabat',
           theme: ThemeData(
               // scaffoldBackgroundColor: ColorsManager.darkBackGround,

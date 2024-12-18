@@ -18,18 +18,16 @@ Future<void> setupGetIt() async {
   // Dio & ApiService
   Dio dio = DioFactory.getDio();
   // getIt.registerLazySingleton<NavigationService>(() => NavigationService());
-  // Reposd
 
   final sharedPrefs = await SharedPreferences.getInstance();
   getIt.registerLazySingleton<SharedPreferences>(() => sharedPrefs);
   getIt.registerLazySingleton<AppPreferences>(() => AppPreferences(getIt()));
   getIt.registerLazySingleton<AuthRepo>(() => AuthRepo(getIt()));
-  getIt.registerLazySingleton<HomeRepo>(() => HomeRepo());
+  getIt.registerLazySingleton<HomeRepo>(() => HomeRepo(getIt()));
   getIt.registerLazySingleton<ApiService>(() => ApiService(dio));
   getIt.registerLazySingleton<ScanRepo>(() => ScanRepo(getIt()));
 // Cubits
   getIt.registerFactory<LoginCubit>(() => LoginCubit(getIt()));
-  getIt.registerFactory<ScanCubit>(() => ScanCubit(getIt()));
-  // getIt.registerFactory<HomeCubit>(() => HomeCubit(getIt()));
   getIt.registerLazySingleton<HomeCubit>(() => HomeCubit(getIt()));
+  getIt.registerFactory<ScanCubit>(() => ScanCubit(getIt(), ));
 }

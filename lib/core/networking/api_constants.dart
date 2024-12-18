@@ -3,6 +3,7 @@ class ApiConstants {
 
   static const String login = "login";
   static const String scanQrCode = "scan-qrcode";
+  static const String storeRecords = "store-records";
 }
 
 class ApiErrors {

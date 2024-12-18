@@ -1,11 +1,14 @@
+import 'package:bwabat/core/di/dependency_injection.dart';
 import 'package:bwabat/core/resources/app_assets.dart';
 import 'package:bwabat/features/main_layout/ui/screen/home_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:persistent_bottom_nav_bar/persistent_bottom_nav_bar.dart';
 
 import '../../../scan/data/models/ticket_model.dart';
+import '../../logic/cubit/home_cubit.dart';
 
 class MainLayoutScreen extends StatefulWidget {
   final TicketType? ticketType;
@@ -43,48 +46,56 @@ class _MainLayoutScreenState extends State<MainLayoutScreen>
     return SafeArea(
       child: PopScope(
         canPop: false,
-        child: Scaffold(
-            body: PersistentTabView(
-          context,
-          controller: _controller,
+        child: BlocProvider(
+          create: (context) => getIt<HomeCubit>(),
+          child: Builder(
+            builder: (context) => Scaffold(
+              body: PersistentTabView(
+                context,
+                controller: _controller,
 
-          screens: _buildScreens(),
-          items: _navBarsItems(),
-          handleAndroidBackButtonPress: false, // Default is true.
-          resizeToAvoidBottomInset:
-              true, // This needs to be true if you want to move up the screen on a non-scrollable screen when keyboard appears. Default is true.
-          stateManagement: true, // Default is true.
-          hideNavigationBarWhenKeyboardAppears: true,
+                screens: _buildScreens(),
+                items: _navBarsItems(),
+                handleAndroidBackButtonPress: false, // Default is true.
+                resizeToAvoidBottomInset:
+                    true, // This needs to be true if you want to move up the screen on a non-scrollable screen when keyboard appears. Default is true.
+                stateManagement: true, // Default is true.
+                hideNavigationBarWhenKeyboardAppears: true,
+                // hideOnScrollSettings:  const HideOnScrollSettings(
+                //             hideNavBarOnScroll: true,
+                //           ),
+                popBehaviorOnSelectedNavBarItemPress: PopBehavior.none,
+                padding: const EdgeInsets.only(
+                  bottom: 10,
+                ),
+                navBarHeight: 70,
+                backgroundColor: Colors.black87,
+                isVisible: true,
+                animationSettings: const NavBarAnimationSettings(
+                  navBarItemAnimation: ItemAnimationSettings(
+                    // Navigation Bar's items animation properties.
+                    duration: Duration(milliseconds: 400),
+                    curve: Curves.ease,
+                  ),
+                  screenTransitionAnimation: ScreenTransitionAnimationSettings(
+                    animateTabTransition: true,
+                    duration: Duration(milliseconds: 200),
+                    screenTransitionAnimationType:
+                        ScreenTransitionAnimationType.fadeIn,
+                  ),
+                ),
+                confineToSafeArea: true,
+                onWillPop: (p0) => Future.value(false),
 
-          popBehaviorOnSelectedNavBarItemPress: PopBehavior.none,
-          padding: const EdgeInsets.only(
-            bottom: 10,
-          ),
-          navBarHeight: 70,
-          backgroundColor: Colors.black87,
-          isVisible: true,
-          animationSettings: const NavBarAnimationSettings(
-            navBarItemAnimation: ItemAnimationSettings(
-              // Navigation Bar's items animation properties.
-              duration: Duration(milliseconds: 400),
-              curve: Curves.ease,
+                decoration: NavBarDecoration(
+                  borderRadius: BorderRadius.circular(20.r),
+                ),
+                margin: const EdgeInsets.all(5),
+                navBarStyle: NavBarStyle.style15,
+              ),
             ),
-            screenTransitionAnimation: ScreenTransitionAnimationSettings(
-              animateTabTransition: true,
-              duration: Duration(milliseconds: 200),
-              screenTransitionAnimationType:
-                  ScreenTransitionAnimationType.fadeIn,
-            ),
           ),
-          confineToSafeArea: true,
-          onWillPop: (p0) => Future.value(false),
-
-          decoration: NavBarDecoration(
-            borderRadius: BorderRadius.circular(20.r),
-          ),
-          margin: const EdgeInsets.all(5),
-          navBarStyle: NavBarStyle.style15,
-        )),
+        ),
       ),
     );
   }

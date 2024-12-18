@@ -14,54 +14,6 @@ import 'package:ticket_widget/ticket_widget.dart';
 
 import '../../../../core/theming/text_styles.dart';
 
-class CustomTicketStatus extends StatelessWidget {
-  final TicketType? ticketType;
-  final Ticket? ticket;
-  const CustomTicketStatus({super.key, this.ticketType, this.ticket});
-
-  @override
-  Widget build(BuildContext context) {
-    return PopScope(
-      canPop: false,
-      child: Padding(
-        padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 30),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.spaceAround,
-          // mainAxisSize: MainAxisSize.min,
-          children: [
-            SvgPicture.asset(
-              Assets.svgsBawabatLogo,
-              height: 50.h,
-              width: 50.h,
-              colorFilter:
-                  const ColorFilter.mode(Colors.white, BlendMode.srcIn),
-            ),
-            BuildTicketWidget(
-                ticketType: ticketType, ticket: ticket ?? Ticket()),
-            // gapH12,
-            GestureDetector(
-              onTap: () => PersistentNavBarNavigator.pushNewScreen(
-                context,
-                screen: const MainLayoutScreen(
-                  ticketType: TicketType.defaultHome,
-                ),
-                withNavBar: true,
-                pageTransitionAnimation: PageTransitionAnimation.scale,
-              ),
-              child: SvgPicture.asset(
-                Assets.svgsSync,
-                height: 90.h,
-                width: 90.w,
-              ),
-            ),
-            gapH64,
-          ],
-        ),
-      ),
-    );
-  }
-}
-
 class BuildTicketWidget extends StatelessWidget {
   final Ticket ticket;
   final TicketType? ticketType;
@@ -72,7 +24,7 @@ class BuildTicketWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return TicketWidget(
       width: double.infinity,
-      height: context.height * .35,
+      height: context.height * .4,
       isCornerRounded: true,
       child: Column(
         children: [
@@ -91,15 +43,17 @@ class BuildTicketWidget extends StatelessWidget {
                     style: TextStyles.font20blackSemiBold,
                   ),
                 if (ticketType == TicketType.error)
-                  Text(
-                    "Unvalid Ticket!",
-                    style: TextStyles.font20blackSemiBold,
+                  Expanded(
+                    child: Text(
+                      "Unvalid Ticket!",
+                      style: TextStyles.font20blackSemiBold,
+                    ),
                   ),
+                         const SizedBox(height: 9),  
               ],
             ),
           ),
-
-          const DottedLine(
+           const DottedLine(
             direction: Axis.horizontal,
             alignment: WrapAlignment.center,
             lineLength: double.infinity,
@@ -164,6 +118,54 @@ class BuildTicketWidget extends StatelessWidget {
             dashGapRadius: 0.0,
           ),
       ],
+    );
+  }
+}
+
+class CustomTicketStatus extends StatelessWidget {
+  final TicketType? ticketType;
+  final Ticket? ticket;
+  const CustomTicketStatus({super.key, this.ticketType, this.ticket});
+
+  @override
+  Widget build(BuildContext context) {
+    return PopScope(
+      canPop: false,
+      child: Padding(
+        padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 30),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
+          // mainAxisSize: MainAxisSize.min,
+          children: [
+            SvgPicture.asset(
+              Assets.svgsBawabatLogo,
+              height: 50.h,
+              width: 50.h,
+              colorFilter:
+                  const ColorFilter.mode(Colors.white, BlendMode.srcIn),
+            ),
+            BuildTicketWidget(
+                ticketType: ticketType, ticket: ticket ?? Ticket()),
+            // gapH12,
+            GestureDetector(
+              onTap: () => PersistentNavBarNavigator.pushNewScreen(
+                context,
+                screen: const MainLayoutScreen(
+                  ticketType: TicketType.defaultHome,
+                ),
+                withNavBar: true,
+                pageTransitionAnimation: PageTransitionAnimation.scale,
+              ),
+              child: SvgPicture.asset(
+                Assets.svgsSync,
+                height: 90.h,
+                width: 90.w,
+              ),
+            ),
+            gapH64,
+          ],
+        ),
+      ),
     );
   }
 }

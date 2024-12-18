@@ -2,11 +2,13 @@ import 'dart:async';
 import 'dart:convert';
 
 import 'package:bloc/bloc.dart';
+import 'package:bwabat/core/di/dependency_injection.dart';
 import 'package:bwabat/core/helpers/constants.dart';
 import 'package:bwabat/core/helpers/encryption_manager.dart';
 import 'package:bwabat/core/helpers/shared_pref_helper.dart';
 import 'package:bwabat/core/networking/api_error_model.dart';
 import 'package:bwabat/features/login/data/models/converted_keys.dart';
+import 'package:bwabat/features/main_layout/logic/cubit/home_cubit.dart';
 import 'package:bwabat/features/scan/data/models/scan_qr_request_body.dart';
 import 'package:bwabat/features/scan/data/models/ticket_model.dart';
 import 'package:bwabat/features/scan/data/repos/scan_repo.dart';
@@ -120,43 +122,68 @@ class ScanCubit extends Cubit<ScanState> {
     final response =
         await _scanRepo.scanQrCode(ScanQrRequestBody(qrCode: qrCode));
 
-    response.when(success: (onlineTicket) {
-      if (kDebugMode) {
-        print(
-            "inSuccess Ticket ID: ${ticket?.msg} Ticket Number: ${ticket?.ticketNumber} Ticket Type: ${ticket?.ticketType} Ticket Status: ${ticket?.userName}    ");
+    response.when(
+      success: (onlineTicket) async {
+        if (kDebugMode) {
+          print("Online ticket processed: ${onlineTicket?.ticketNumber}");
+        }
+        if (onlineTicket != null) {
+          onlineTicket.scanTime = DateTime.now().toIso8601String();
+          ticket = onlineTicket;
+        }
+      },
+      failure: (error) {
+        emit(ScanErrorState(error));
       }
-
-      ticket = onlineTicket;
-
-      // print every attribute in th ticket
-    }, failure: (error) {
-      emit(ScanErrorState(error));
-    });
-    return;
+    );
   }
 
   Future<void> _processBarcodeOffline(String rawValue) async {
-    final ConvertedKeys? convertedKeys =
-        await SharedPrefHelper.retrieveConvertedKeysSecurely();
+    try {
+      final ConvertedKeys? convertedKeys =
+          await SharedPrefHelper.retrieveConvertedKeysSecurely();
+      final String? decryptedData = EncryptionManager.decryptData(
+        rawValue,
+        ConvertedKeys(
+          encryprionkey: convertedKeys?.encryprionkey,
+          iv: convertedKeys?.iv,
+        ),
+      );
 
-    final String? decryptedData = EncryptionManager.decryptData(
-      rawValue,
-      ConvertedKeys(
-          encryprionkey: convertedKeys?.encryprionkey, iv: convertedKeys?.iv),
-    );
-    if (kDebugMode) {
-      print("decryptedData: ${convertedKeys?.encryprionkey ?? ""}");
-      print("decryptedData: ${convertedKeys?.iv ?? ""}");
-      print("decryptedData: $decryptedData");
+      if (decryptedData != null) {
+        if (kDebugMode) {
+          print("Offline ticket data: $decryptedData");
+        }
+
+        // Create offline ticket
+        final Map<String, dynamic> ticketData = json.decode(decryptedData);
+        final newTicket = Ticket.fromJson(ticketData);
+        newTicket.scanTime = DateTime.now().toIso8601String();
+        ticket = newTicket;
+
+        // Cache the ticket using HomeCubit
+        if (ticket != null) {
+          await _cacheTicketInHomeCubit(ticket!);
+        }
+      }
+    } catch (e) {
+      if (kDebugMode) {
+        print("Error processing offline ticket: $e");
+      }
+      rethrow;
     }
+  }
 
-    if (decryptedData == null) return;
-    ticket = Ticket.fromJson(jsonDecode(decryptedData));
-
-    debugPrint(
-        " inOffline Ticket ID: ${ticket?.msg} Ticket Number: ${ticket?.ticketNumber} Ticket Type: ${ticket?.ticketType} Ticket Status: ${ticket?.userName}");
-    // emit(ScanNavigationState(ticket: ticket));
-    return;
+  Future<void> _cacheTicketInHomeCubit(Ticket ticket) async {
+    try {
+      final homeCubit = getIt<HomeCubit>();
+      await homeCubit.handleTicketScan(ticket);
+    } catch (e) {
+      if (kDebugMode) {
+        print("Error caching ticket: $e");
+      }
+      rethrow;
+    }
   }
 
   /// Mark navigation as completed

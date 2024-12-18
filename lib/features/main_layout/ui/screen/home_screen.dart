@@ -1,4 +1,3 @@
-import 'package:bwabat/core/di/dependency_injection.dart';
 import 'package:bwabat/features/main_layout/logic/cubit/home_cubit.dart';
 import 'package:bwabat/features/main_layout/ui/widgets/custom_ticket_status_body.dart';
 import 'package:bwabat/features/main_layout/ui/widgets/default_home_body.dart';
@@ -16,20 +15,32 @@ class HomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-        create: (context) => getIt<HomeCubit>(),
-        child: HomeBlocListener(
-          child: Scaffold(
-            body: PopScope(
-              canPop: false,
-              child: Container(
-                  height: double.infinity,
-                  color: const Color(0xFF081B33),
-                  child:
-                      _buildHomeWidget(ticketType ?? TicketType.defaultHome)),
-            ),
-          ),
-        ));
+    return HomeBlocListener(
+      child: Scaffold(
+        floatingActionButtonAnimator: FloatingActionButtonAnimator.scaling,
+        
+        floatingActionButtonLocation: FloatingActionButtonLocation.endTop,
+        floatingActionButton:      
+               Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 10,vertical:30),
+                 child: IconButton(
+                  onPressed: () => context.read<HomeCubit>().signOut(),
+                  icon: const Icon(
+                    Icons.exit_to_app_rounded,
+                    color: Colors.red,
+                    size: 30,
+                  )),
+               ), 
+        body: PopScope(
+          canPop: false,
+          child: Container(
+              height: double.infinity,
+              color: const Color(0xFF081B33),
+              child:
+                  _buildHomeWidget(ticketType ?? TicketType.defaultHome)),
+        ),
+      ),
+    );
   }
 
   Widget _buildHomeWidget(TicketType ticketType) {
@@ -44,8 +55,10 @@ class HomeScreen extends StatelessWidget {
             ticketType: ticketType); // Replace with the desired widget
       case TicketType.defaultHome:
         return const DefaultHome(); // Replace with your DefaultHome widget
+      case TicketType.pending:
+        return const SizedBox.shrink();
     }
   }
 }
 
-enum TicketType { success, error, defaultHome }
+enum TicketType { success, error, defaultHome, pending }
